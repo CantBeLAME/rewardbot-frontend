@@ -1,0 +1,75 @@
+import { Fieldset, Form, Input, Label } from "../components/Form";
+import { Button } from "../components/Button";
+
+export default function CreateAccount() {
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		const form = new FormData(event.currentTarget);
+        const username = form.get("username");
+        const email = form.get("email");
+        const password = form.get("password");
+
+        const groupInformation = JSON.parse(localStorage.getItem("groupInformation"));
+
+        if (!groupInformation) {
+            localStorage.setItem("groupInformation", JSON.stringify([{username, email, password}]));
+            return;
+        }
+
+        if (groupInformation.find((user) => user.email === email)) {
+            alert("Email already exists");
+            return;
+        }
+
+        localStorage.setItem("groupInformation", JSON.stringify([...groupInformation, {username, email, password}]));
+	};
+
+	return (
+		<div className="flex min-h-screen items-center justify-center bg-gray-100">
+			<div className="w-full max-w-md space-y-4 rounded-lg bg-white p-8 shadow-md">
+				<h2 className="text-center text-2xl font-bold text-gray-700">
+					Register
+				</h2>
+				<Form className="space-y-6" onSubmit={handleSubmit}>
+					<Fieldset>
+						<Label className="pt-3">
+							Username
+							<Input
+								type="text"
+								name="username"
+								placeholder="Enter your username"
+							/>
+						</Label>
+						<Label className="pt-3">
+							Email
+							<Input
+								type="email"
+								name="email"
+								placeholder="Enter your email"
+							/>
+						</Label>
+
+						<Label>
+							Password
+							<Input
+								type="password"
+								name="password"
+								placeholder="Enter your password"
+							/>
+						</Label>
+						<Label>
+							Confirm Password
+							<Input
+								type="password"
+                                name="confirmation-password"
+								placeholder="Confirm your password"
+							/>
+						</Label>
+						<Button type="submit">Register</Button>
+					</Fieldset>
+				</Form>
+			</div>
+		</div>
+	);
+}
