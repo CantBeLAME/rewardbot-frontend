@@ -12,7 +12,7 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/uninstall" element={<About />} />

@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { apiGetUser } from "../database/api/user";
 
 export default function Welcome() {
+	const [username, setUserName] = useState('');
 
-	const email = localStorage.getItem("email");
-	const groupInformation = JSON.parse(localStorage.getItem("groupInformation"));
+	useEffect(() => {
+		const fetchUser = async () => {
+			const { user } = await apiGetUser();
+			setUserName(user.username);
+		}
+		fetchUser()
+	}, []);
 
-	const user = groupInformation.find((user) => user.email === email);
+
 	return (
 		<>
 			<div className="flex min-h-screen items-center justify-center bg-gray-100">
 				<div className="w-full max-w-md space-y-4 rounded-lg bg-white p-8 shadow-md">
 					<h2 className="text-center text-2xl font-bold text-gray-700">
-						Hi {user.username}!
+						Hi {username}!
 					</h2>
 					<p className="flex w-full text-center">Download RewardBot with the Link Below!</p>
 					

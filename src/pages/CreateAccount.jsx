@@ -1,28 +1,37 @@
 import { Fieldset, Form, Input, Label } from "../components/Form";
 import { Button } from "../components/Button";
+import { usePostUser } from "../database/query/user";
+import { apiGetUserByEmail } from '../database/api/user';
+import { useNavigate } from "react-router-dom";
 
 export default function CreateAccount() {
+	const { postUser } = usePostUser();
+	// const { getUserByEmail  } = useGetUserByEmail();
 
-	const handleSubmit = (event) => {
+	const navigate = useNavigate();
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const form = new FormData(event.currentTarget);
         const username = form.get("username");
         const email = form.get("email");
         const password = form.get("password");
 
-        const groupInformation = JSON.parse(localStorage.getItem("groupInformation"));
 
-        if (!groupInformation) {
-            localStorage.setItem("groupInformation", JSON.stringify([{username, email, password}]));
-            return;
-        }
+		const data = await apiGetUserByEmail({ email });
+		if (data) {
+			alert("Email already exists");
+			return;
+		}
 
-        if (groupInformation.find((user) => user.email === email)) {
-            alert("Email already exists");
-            return;
-        }
 
-        localStorage.setItem("groupInformation", JSON.stringify([...groupInformation, {username, email, password}]));
+		await postUser({ username, email, password }, 
+			{ onSuccess: () => {
+					alert("User created successfully") 
+					navigate("/login");
+			}},
+			{ onError: () => alert("User creation failed") }
+		);
+
 	};
 
 	return (
