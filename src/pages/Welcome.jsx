@@ -1,20 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { apiGetUser } from "../api/user";
+import React from "react";
+import { useAuth } from "../hooks/auth/useAuth";
 
 export default function Welcome() {
-	const [username, setUserName] = useState('');
+	 const { user: { username }, loading } = useAuth();
 
-	useEffect(() => {
-		const fetchUser = async () => {
-			const { user } = await apiGetUser();
-			if (!user || user === undefined) {
-				return;
-			}
-			setUserName(user.username);
-		}
-		fetchUser()
-	}, []);
-
+	 if (loading) {
+		 return <div>Loading...</div>;
+	 }
 
 	return (
 		<>

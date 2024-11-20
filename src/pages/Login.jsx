@@ -25,7 +25,7 @@ export default function Login() {
 		setUserInfo(data.user);
 		
 		alert("Login successful");
-		navigate("/welcome");
+		navigate("/statistics");
 	};
 
 	return (
