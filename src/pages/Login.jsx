@@ -2,12 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom"
 import { Fieldset, Form, Input, Label } from "../components/Form";
 import { Button } from "../components/Button";
-import { apiLogin } from '../database/api/user';
+import { apiLogin } from '../api/user';
 import { useNavigate } from "react-router-dom";
-
+import { useAuthStore } from "../store/auth";
 
 export default function Login() {
 	const navigate = useNavigate();
+	const { setUserInfo } = useAuthStore();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -15,16 +16,15 @@ export default function Login() {
 		const email = formData.get("email");
 		const password = formData.get("password");
 
-		const status = await apiLogin({ email, password })
-		
-		if (status !== 200){
+		const {status, data} = await apiLogin({ email, password })
+
+		if (status !== 200) {
 			alert("Login failed");
 			return;
 		}
-
+		setUserInfo(data.user);
+		
 		alert("Login successful");
-		localStorage.setItem("email", email);
-		//navigate to welcomepage
 		navigate("/welcome");
 	};
 

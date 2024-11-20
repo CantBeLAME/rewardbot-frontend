@@ -1,4 +1,5 @@
 import { axiosDefault, axiosAuth } from './index';
+import navigateTo from '../utils/navigateTo';
 
 export const apiGetUserByEmail = async ({ email }) => {
 	try {
@@ -6,6 +7,7 @@ export const apiGetUserByEmail = async ({ email }) => {
 		return response.data;
 	} catch (error) {
 		console.log(error);
+		navigateTo('/login');
 	}
 };
 
@@ -15,16 +17,17 @@ export const apiGetUser = async () => {
 		return response.data;
 	} catch (error) {
 		console.log(error);
+		navigateTo('/login');
 	}
 };
 
 export const apiPostUser = async (data) => {
 	try {
 		const response = await axiosDefault.post(`user`, data);
-		console.log(response);
 		return response.data;
 	} catch (error) {
-		throw error;
+		console.log(error);
+		navigateTo('/login');
 	}
 };
 
@@ -32,10 +35,9 @@ export const apiPostUser = async (data) => {
 export const apiLogin = async ({ email, password }) => {
 	try {
 		const response = await axiosDefault.post('/login', { email, password });
-		console.log(response);
-		return response.status
+		return {status: response.status, data: response.data};
 	} catch (error) {
-		console.error(error);
-		return error.response.data;
+		console.log(error);
+		navigateTo('/login');
 	}
 }

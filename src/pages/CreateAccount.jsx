@@ -1,20 +1,20 @@
 import { Fieldset, Form, Input, Label } from "../components/Form";
 import { Button } from "../components/Button";
-import { usePostUser } from "../database/query/user";
-import { apiGetUserByEmail } from '../database/api/user';
-import { useNavigate } from "react-router-dom";
+import { usePostUser } from "../hooks/query/user";
+import { apiGetUserByEmail } from '../api/user';
+import { Link, useNavigate } from "react-router-dom";
 
 export default function CreateAccount() {
 	const { postUser } = usePostUser();
-	// const { getUserByEmail  } = useGetUserByEmail();
 
 	const navigate = useNavigate();
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const form = new FormData(event.currentTarget);
-        const username = form.get("username");
-        const email = form.get("email");
-        const password = form.get("password");
+		const username = form.get("username") ;
+		const email = form.get("email");
+		const password = form.get("password");
+		const canvasToken = form.get("canvasToken");
 
 
 		const data = await apiGetUserByEmail({ email });
@@ -24,13 +24,13 @@ export default function CreateAccount() {
 		}
 
 
-		await postUser({ username, email, password }, 
-			{ onSuccess: () => {
-					alert("User created successfully") 
-					navigate("/login");
-			}},
-			{ onError: () => alert("User creation failed") }
-		);
+		postUser({ username, email, password, canvasToken }, {
+			onSuccess: () => {
+				alert("User created successfully");
+				navigate("/login");
+			},
+			onError: () => alert("User creation failed")
+		});
 
 	};
 
@@ -71,9 +71,23 @@ export default function CreateAccount() {
 							Confirm Password
 							<Input
 								type="password"
-                                name="confirmation-password"
+								name="confirmation-password"
 								placeholder="Confirm your password"
 							/>
+						</Label>
+						<Label>
+							Canvas Access Token
+							<Input
+								type="password"
+								name="canvasToken"
+								placeholder="Enter your canvas access token"
+							/>
+						</Label>
+						<Label>
+							Need help?
+							<Link className="font-bold underline" to="https://community.canvaslms.com/t5/Canvas-Basics-Guide/How-do-I-manage-API-access-tokens-in-my-user-account/ta-p/615312#:~:text=Mobile%20access%20tokens%20are%20generated,access%20token%20must%20be%20deleted." target="_blank" rel="noopener noreferrer">
+								{' '}How to get a Canvas Access Token
+							</Link>
 						</Label>
 						<Button type="submit">Register</Button>
 					</Fieldset>

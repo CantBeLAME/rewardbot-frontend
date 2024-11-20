@@ -1,27 +1,35 @@
 
 import axios from 'axios';
 
-
-const BASE_URL = process.env.REACT_APP_API_URL;
-console.log("BASE_URL:", BASE_URL);
+export const BASE_URL = process.env.REACT_APP_API_URL;
 
 export const axiosDefault = axios.create({
-	baseURL: BASE_URL,
-	timeout: 8000,
-	headers: {
-		ContentType: 'application/json',
-	},
-	withCredentials: true, 
+  baseURL: BASE_URL,
+  timeout: 8000,
+  headers: {
+    ContentType: 'application/json',
+  },
+  withCredentials: true,
+});
+
+export const axiosCanvas = axios.create({
+  baseURL: '/api/v1/',
+  headers: {
+    'Authorization': `Bearer ${process.env.REACT_APP_TEMP_ACCESS_CODE}`,
+    'Content-Type': 'application/json',
+  },
+  timeout: 8000, 
+  withCredentials: true,
 });
 
 // Create an Axios instance
 export const axiosAuth = axios.create({
-  	baseURL: BASE_URL, 
-	timeout: 8000,
-	headers: {
-		ContentType: 'application/json',
-	},
-  	withCredentials: true,
+  baseURL: BASE_URL,
+  timeout: 8000,
+  headers: {
+    ContentType: 'application/json',
+  },
+  withCredentials: true,
 });
 
 // Flag to prevent multiple refresh requests

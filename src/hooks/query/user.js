@@ -1,5 +1,5 @@
+import { apiGetUserByEmail, apiPostUser } from '../../api/user';
 import { useQuery,useMutation } from 'react-query';
-import { apiGetUserByEmail, apiPostUser } from '../api/user';
 
 export const useGetUserByEmail = ({ email }) => {
 	

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { apiGetUser } from "../database/api/user";
+import { apiGetUser } from "../api/user";
 
 export default function Welcome() {
 	const [username, setUserName] = useState('');
@@ -7,6 +7,9 @@ export default function Welcome() {
 	useEffect(() => {
 		const fetchUser = async () => {
 			const { user } = await apiGetUser();
+			if (!user || user === undefined) {
+				return;
+			}
 			setUserName(user.username);
 		}
 		fetchUser()
@@ -21,7 +24,7 @@ export default function Welcome() {
 						Hi {username}!
 					</h2>
 					<p className="flex w-full text-center">Download RewardBot with the Link Below!</p>
-					
+
 				</div>
 			</div>
 		</>
