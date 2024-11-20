@@ -3,7 +3,9 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import { CreateAccount, Login, Statistics, Welcome } from "./pages";
+import { CreateAccount, Login, Statistics, Welcome, Profile } from "./pages";
+import Nav from "./components/Nav";
+
 
 
 export default function Router() {
@@ -14,13 +16,17 @@ export default function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create-account" element={<CreateAccount />} />
-        <Route path="/welcome" element={<Welcome />} />
         <Route path="/uninstall" element={<About />} />
-        <Route path="/statistics" element={<Statistics />} />
+
+        <Route path="/welcome" element={<Nav><Welcome /></Nav>} />
+        <Route path="/statistics" element={<Nav><Statistics /></Nav>} />
+        <Route path="/profile" element={<Nav><Profile /></Nav>} />
       </Routes>
     </BrowserRouter>
   );
 }
+
+
 // apiReq
 function About() {
   return <h2>About</h2>;

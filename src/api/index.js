@@ -15,11 +15,10 @@ export const axiosDefault = axios.create({
 export const axiosCanvas = axios.create({
   baseURL: '/api/v1/',
   headers: {
-    // 'Authorization': `Bearer ${process.env.REACT_APP_TEMP_ACCESS_CODE}`,
     'Content-Type': 'application/json',
   },
   timeout: 8000, 
-  withCredentials: true,
+  withCredentials: false,
 });
 
 // Create an Axios instance

@@ -20,6 +20,6 @@ export const useAuth = () => {
     fetchUser();
   }, []);
 
-  return { user: { username: user?.username, email: user?.email, password: user?.password, canvasToken: user?.canvasToken }, loading };
+  return { user: { username: user?.username, email: user?.email, password: user?.password, canvasToken: user?.canvasToken, createdAt: user?.createdAt }, loading };
   
 };

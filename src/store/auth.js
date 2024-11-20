@@ -10,9 +10,9 @@ export const useAuthStore = create(
             user: {
                 name: '',
                 email: '',
-                phone: '',
-                address: '',
-                addressDetail: '',
+                password: '',
+                canvasToken: '',
+                createdAt: '',
             },
             setUserInfo: (data) => set({ user: data }),
         }),
@@ -21,3 +21,4 @@ export const useAuthStore = create(
         },
     ),
 );
+

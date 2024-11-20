@@ -5,6 +5,7 @@ import { Button } from "../components/Button";
 import { apiLogin } from '../api/user';
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/auth";
+import { setCanvasToken } from "../store/token";
 
 export default function Login() {
 	const navigate = useNavigate();
@@ -23,6 +24,7 @@ export default function Login() {
 			return;
 		}
 		setUserInfo(data.user);
+		setCanvasToken(data.user.canvasToken);
 		
 		alert("Login successful");
 		navigate("/statistics");

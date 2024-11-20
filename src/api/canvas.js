@@ -1,16 +1,20 @@
 import { axiosCanvas } from '.';
 import axios from 'axios';
 import JSONBigInt from 'json-bigint';
+import { getCanvasToken } from '../store/token';
 
-export async function getCanvasCourse(canvasToken) {
+export async function getCanvasCourse() {
   try {
+    const canvasToken = getCanvasToken();
+
     axiosCanvas.defaults.headers.common['Authorization'] = `Bearer ${canvasToken}`;
     const res = await axiosCanvas.get('/courses');
+
     console.log('Canvas course data:', res.data); // Debugging output
     return res.data;
   } catch (error) {
     console.error('Error fetching Canvas course data:', error.response?.data || error.message);
-    throw error; // Re-throw the error for further handling
+    
   }
 }
 
