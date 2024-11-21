@@ -1,5 +1,5 @@
-import React from 'react';
-import { useAuth } from '../hooks/auth/useAuth';
+import React from "react";
+import { useAuth } from "../hooks/auth/useAuth";
 
 export default function Welcome() {
 	const {

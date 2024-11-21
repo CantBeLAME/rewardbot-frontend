@@ -1,12 +1,13 @@
-import React from 'react';
-import { useAuth } from '../hooks/auth/useAuth';
+import React from "react";
+import { useAuth } from "../hooks/auth/useAuth";
 // import { useAuthStore } from "../store/auth";
 
 const ProfilePage = () => {
 	const {
-		user: { username, email, canvasToken, createdAt },
+		user: { username, email, createdAt },
 	} = useAuth();
-	// const { user: { username }, loading } = useAuth();
+
+	// const { setUserInfo } = useAuthStore();
 
 	return (
 		<div className="flex min-h-screen items-center justify-center bg-gray-100">

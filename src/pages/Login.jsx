@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Fieldset, Form, Input, Label } from '../components/Form';
-import { Button } from '../components/Button';
-import { apiLogin } from '../api/user';
-import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../store/auth';
-import { setCanvasToken } from '../store/token';
-import Popup from 'react-popup';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Fieldset, Form, Input, Label } from "../components/Form";
+import { Button } from "../components/Button";
+import { apiLogin } from "../api/user";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/auth";
+import { setCanvasToken } from "../store/token";
+import Popup from "react-popup";
 
 export default function Login() {
 	const navigate = useNavigate();
@@ -15,19 +15,19 @@ export default function Login() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
-		const email = formData.get('email');
-		const password = formData.get('password');
+		const email = formData.get("email");
+		const password = formData.get("password");
 
 		const { status, data } = await apiLogin({ email, password });
 
 		if (status !== 200) {
-			Popup.alert('Login failed');
+			Popup.alert("Login failed");
 			return;
 		}
 		setUserInfo(data.user);
 		setCanvasToken(data.user.canvasToken);
 
-		navigate('/statistics');
+		navigate("/statistics");
 	};
 
 	return (

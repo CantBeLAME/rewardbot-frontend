@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -6,15 +6,15 @@ export const axiosDefault = axios.create({
 	baseURL: BASE_URL,
 	timeout: 8000,
 	headers: {
-		ContentType: 'application/json',
+		ContentType: "application/json",
 	},
 	withCredentials: true,
 });
 
 export const axiosCanvas = axios.create({
-	baseURL: '/api/v1/',
+	baseURL: "/api/v1/",
 	headers: {
-		'Content-Type': 'application/json',
+		"Content-Type": "application/json",
 	},
 	timeout: 8000,
 	withCredentials: false,
@@ -25,7 +25,7 @@ export const axiosAuth = axios.create({
 	baseURL: BASE_URL,
 	timeout: 8000,
 	headers: {
-		ContentType: 'application/json',
+		ContentType: "application/json",
 	},
 	withCredentials: true,
 });
@@ -55,7 +55,7 @@ axiosAuth.interceptors.response.use(
 				// Queue the request while refreshing
 				return new Promise((resolve) => {
 					refreshSubscribers.push((newAccessToken) => {
-						originalRequest.headers['Authorization'] =
+						originalRequest.headers["Authorization"] =
 							`Bearer ${newAccessToken}`;
 						resolve(axiosAuth(originalRequest));
 					});
@@ -78,15 +78,15 @@ axiosAuth.interceptors.response.use(
 				onRefreshed(newAccessToken);
 
 				// Update the failed request with the new token
-				originalRequest.headers['Authorization'] =
+				originalRequest.headers["Authorization"] =
 					`Bearer ${newAccessToken}`;
 				return axiosAuth(originalRequest);
 			} catch (refreshError) {
 				isRefreshing = false;
 				refreshSubscribers = [];
-				console.error('Refresh token failed:', refreshError);
+				console.error("Refresh token failed:", refreshError);
 				// Redirect to login
-				window.location.href = '/login';
+				window.location.href = "/login";
 				return Promise.reject(refreshError);
 			}
 		}

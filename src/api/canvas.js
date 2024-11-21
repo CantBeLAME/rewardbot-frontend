@@ -1,35 +1,35 @@
-import { axiosCanvas } from '.';
-import axios from 'axios';
-import JSONBigInt from 'json-bigint';
-import { getCanvasToken } from '../store/token';
-import Popup from 'react-popup';
-import { setCanvasToken } from '../store/token';
+import { axiosCanvas } from ".";
+import axios from "axios";
+import JSONBigInt from "json-bigint";
+import { getCanvasToken } from "../store/token";
+import Popup from "react-popup";
+import { setCanvasToken } from "../store/token";
 
 export async function getCanvasCourse() {
 	try {
-		const { status, data } = await axiosCanvas.get('/courses');
+		const { status, data } = await axiosCanvas.get("/courses");
 
 		return { status, data };
 	} catch (error) {
 		console.log(
-			'Error fetching Canvas course data:',
+			"Error fetching Canvas course data:",
 			error.response?.data || error.message,
 		);
 	}
 }
-
+// eslint-disable-next-line: true react-hooks/exhaustive-deps
 export async function getCanvasUser() {
 	try {
 		const canvasToken = getCanvasToken();
 
-		axiosCanvas.defaults.headers.common['Authorization'] =
+		axiosCanvas.defaults.headers.common["Authorization"] =
 			`Bearer ${canvasToken}`;
-		const res = await axiosCanvas.get('/users/self');
+		const res = await axiosCanvas.get("/users/self");
 
 		return { status: res.status, data: res.data };
 	} catch (error) {
 		console.error(
-			'Error fetching Canvas course data:',
+			"Error fetching Canvas course data:",
 			error.response?.data || error.message,
 		);
 	}
@@ -40,7 +40,7 @@ export async function validateToken(getCanvasInfo, cancel, save) {
 		try {
 			const canvasToken = getCanvasToken();
 
-			axiosCanvas.defaults.headers.common['Authorization'] =
+			axiosCanvas.defaults.headers.common["Authorization"] =
 				`Bearer ${canvasToken}`;
 			const { data } = await getCanvasInfo();
 
@@ -48,12 +48,12 @@ export async function validateToken(getCanvasInfo, cancel, save) {
 		} catch (err) {
 			Popup.plugins().canvasTokenPopup(
 				(value) => {
-					console.log('Cancel clicked. Token value:', value);
+					console.log("Cancel clicked. Token value:", value);
 					Popup.close();
 					cancel();
 				},
 				async (token) => {
-					console.log('New token entered:', token);
+					console.log("New token entered:", token);
 					setCanvasToken(token);
 					Popup.close();
 					// TODO: Save the token somewhere (e.g., in state or local storage)
@@ -86,11 +86,11 @@ export async function getPaginatedRequest(url, recurse = false) {
 			transformResponse: [(data) => JSONBigInt.parse(data)],
 		});
 
-		if (recurse && 'link' in res.headers) {
-			const parsed = parseLinkHeader(res.headers['link']);
-			if (parsed && 'next' in parsed && parsed['next'].url !== url)
+		if (recurse && "link" in res.headers) {
+			const parsed = parseLinkHeader(res.headers["link"]);
+			if (parsed && "next" in parsed && parsed["next"].url !== url)
 				return res.data.concat(
-					await getPaginatedRequest(parsed['next'].url, true),
+					await getPaginatedRequest(parsed["next"].url, true),
 				);
 		}
 

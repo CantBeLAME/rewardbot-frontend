@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { CreateAccount, Login, Statistics, Welcome, Profile } from './pages';
-import Nav from './components/Nav';
-import PopUp from './components/PopUp';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CreateAccount, Login, Statistics, Welcome, Profile } from "./pages";
+import Nav from "./components/Nav";
+import PopUp from "./components/PopUp";
 
 export default function Router() {
 	return (

@@ -1,8 +1,8 @@
-import { Fieldset, Form, Input, Label } from '../components/Form';
-import { Button } from '../components/Button';
-import { usePostUser } from '../hooks/query/user';
-import { apiGetUserByEmail } from '../api/user';
-import { Link, useNavigate } from 'react-router-dom';
+import { Fieldset, Form, Input, Label } from "../components/Form";
+import { Button } from "../components/Button";
+import { usePostUser } from "../hooks/query/user";
+import { apiGetUserByEmail } from "../api/user";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function CreateAccount() {
 	const { postUser } = usePostUser();
@@ -11,14 +11,14 @@ export default function CreateAccount() {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const form = new FormData(event.currentTarget);
-		const username = form.get('username');
-		const email = form.get('email');
-		const password = form.get('password');
-		const canvasToken = form.get('canvasToken');
+		const username = form.get("username");
+		const email = form.get("email");
+		const password = form.get("password");
+		const canvasToken = form.get("canvasToken");
 
 		const data = await apiGetUserByEmail({ email });
 		if (data) {
-			alert('Email already exists');
+			alert("Email already exists");
 			return;
 		}
 
@@ -26,10 +26,10 @@ export default function CreateAccount() {
 			{ username, email, password, canvasToken },
 			{
 				onSuccess: () => {
-					alert('User created successfully');
-					navigate('/login');
+					alert("User created successfully");
+					navigate("/login");
 				},
-				onError: () => alert('User creation failed'),
+				onError: () => alert("User creation failed"),
 			},
 		);
 	};
@@ -96,7 +96,7 @@ export default function CreateAccount() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								{' '}
+								{" "}
 								How to get a Canvas Access Token
 							</Link>
 						</Label>

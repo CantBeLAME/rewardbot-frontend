@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import Popup from 'react-popup';
-import { Label, Input } from './Form';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import Popup from "react-popup";
+import { Label, Input } from "./Form";
+import { Link } from "react-router-dom";
 
 const CanvasTokenPopupContent = ({ onChange }) => {
 	return (
@@ -28,21 +28,21 @@ const CanvasTokenPopupContent = ({ onChange }) => {
 
 export default function PopUp() {
 	useEffect(() => {
-		Popup.registerPlugin('canvasTokenPopup', function (cancel, success) {
-			let token = '';
+		Popup.registerPlugin("canvasTokenPopup", function (cancel, success) {
+			let token = "";
 
 			const handleChange = (e) => {
 				token = e.target.value;
 			};
 
 			this.create({
-				title: 'Invalid or Missing Canvas Token',
+				title: "Invalid or Missing Canvas Token",
 				content: <CanvasTokenPopupContent onChange={handleChange} />,
 				buttons: {
 					left: [
 						{
-							text: 'Cancel',
-							className: 'danger',
+							text: "Cancel",
+							className: "danger",
 							action: function () {
 								cancel(token);
 								Popup.close();
@@ -51,8 +51,8 @@ export default function PopUp() {
 					],
 					right: [
 						{
-							text: 'Save',
-							className: 'success',
+							text: "Save",
+							className: "success",
 							action: function () {
 								success(token);
 								Popup.close();

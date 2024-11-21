@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { getCanvasCourse, validateToken } from '../api/canvas';
-import { useAuth } from '../hooks/auth/useAuth';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { getCanvasCourse, validateToken } from "../api/canvas";
+import { useAuth } from "../hooks/auth/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export default function Statistics() {
 	const { loading } = useAuth();
 	const navigate = useNavigate();
 	const [stats, setStats] = useState([]);
 
-	const getStats = (data) => {
-		setStats(data);
-	};
-
-	const callback = () => {
-		navigate('/login');
-	};
-
 	useEffect(() => {
-		validateToken(getCanvasCourse, callback, getStats);
+		validateToken(
+			getCanvasCourse,
+			() => {
+				navigate("/login");
+			},
+			(data) => {
+				setStats(data);
+			},
+		);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	if (loading) {

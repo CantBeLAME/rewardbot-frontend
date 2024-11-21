@@ -1,9 +1,9 @@
-import { apiGetUserByEmail, apiPostUser } from '../../api/user';
-import { useQuery, useMutation } from 'react-query';
+import { apiGetUserByEmail, apiPostUser } from "../../api/user";
+import { useQuery, useMutation } from "react-query";
 
 export const useGetUserByEmail = ({ email }) => {
 	const { data: getUserByEmail } = useQuery({
-		queryKey: ['user', email],
+		queryKey: ["user", email],
 		queryFn: () => apiGetUserByEmail({ email }),
 	});
 
@@ -17,7 +17,7 @@ export const usePostUser = () => {
 			return await apiPostUser(data);
 		},
 		onError: (error) => {
-			console.error('Registration failed:', error);
+			console.error("Registration failed:", error);
 		},
 	});
 

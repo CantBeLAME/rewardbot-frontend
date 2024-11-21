@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { FiHome, FiUser, FiMenu, FiLogOut } from 'react-icons/fi';
-import { ImStatsDots } from 'react-icons/im';
-import { Link } from 'react-router-dom';
-import { apiLogout } from '../api/user';
+import React, { useState } from "react";
+import { FiHome, FiUser, FiMenu, FiLogOut } from "react-icons/fi";
+import { ImStatsDots } from "react-icons/im";
+import { Link } from "react-router-dom";
+import { apiLogout } from "../api/user";
 
 export default function Nav({ children }) {
 	const [isOpen, setIsOpen] = useState(true);
@@ -16,13 +16,13 @@ export default function Nav({ children }) {
 			{/* Sidebar */}
 			<div
 				className={`transition-width flex h-screen flex-col bg-gray-800 p-5 text-white duration-300 ${
-					isOpen ? 'w-64' : 'w-16'
+					isOpen ? "w-64" : "w-16"
 				}`}
 			>
 				{/* Logo and Menu Button */}
 				<div className="flex items-center justify-between">
 					<div
-						className={`text-xl font-bold ${!isOpen && 'hidden'} transition duration-300`}
+						className={`text-xl font-bold ${!isOpen && "hidden"} transition duration-300`}
 					>
 						MyApp
 					</div>
@@ -67,7 +67,7 @@ export default function Nav({ children }) {
 const NavItem = ({ icon, label, isOpen, to }) => (
 	<Link
 		to={to}
-		className={`flex items-center text-gray-300 hover:bg-gray-700 hover:text-white ${isOpen && 'px-3'} rounded-lg py-2`}
+		className={`flex items-center text-gray-300 hover:bg-gray-700 hover:text-white ${isOpen && "px-3"} rounded-lg py-2`}
 	>
 		<span className="text-xl">{icon}</span>
 		{isOpen && <span className="ml-4">{label}</span>}
@@ -75,17 +75,17 @@ const NavItem = ({ icon, label, isOpen, to }) => (
 );
 
 const Logout = ({ isOpen }) => {
-    const logout = async() => {
-        await apiLogout();
-    }
+	const logout = async () => {
+		await apiLogout();
+	};
 	return (
 		<Link
-			to={'/login'}
-            onCLick={logout}
-			className={`flex items-center text-gray-300 hover:bg-gray-700 hover:text-white ${isOpen && 'px-3'} rounded-lg py-2`}
+			to={"/login"}
+			onCLick={logout}
+			className={`flex items-center text-gray-300 hover:bg-gray-700 hover:text-white ${isOpen && "px-3"} rounded-lg py-2`}
 		>
 			<span className="text-xl">{<FiLogOut />}</span>
-			{isOpen && <span className="ml-4">{'Logout'}</span>}
+			{isOpen && <span className="ml-4">{"Logout"}</span>}
 		</Link>
 	);
 };

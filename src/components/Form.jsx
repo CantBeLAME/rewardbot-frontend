@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
 // Form Component
-export const Form = ({ children, className = '', ...rest }) => (
+export const Form = ({ children, className = "", ...rest }) => (
 	<form {...rest} className={`space-y-6 ${className}`}>
 		{children}
 	</form>
 );
 
 // Fieldset Component
-export const Fieldset = ({ children, className = '', ...rest }) => (
+export const Fieldset = ({ children, className = "", ...rest }) => (
 	<fieldset
 		{...rest}
 		className={`flex flex-col gap-1 rounded-md ${className}`}
@@ -18,7 +18,7 @@ export const Fieldset = ({ children, className = '', ...rest }) => (
 );
 
 // Label Component
-export const Label = ({ children, className = '', ...rest }) => (
+export const Label = ({ children, className = "", ...rest }) => (
 	<label
 		className={`py-3 text-sm font-medium text-gray-700 ${className}`}
 		{...rest}
@@ -28,7 +28,7 @@ export const Label = ({ children, className = '', ...rest }) => (
 );
 
 // TextInput Component
-export const Input = ({ className = '', ...rest }) => (
+export const Input = ({ className = "", ...rest }) => (
 	<input
 		{...rest}
 		className={`w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 ${className}`}
@@ -36,7 +36,7 @@ export const Input = ({ className = '', ...rest }) => (
 );
 
 // Checkbox Component
-export const Checkbox = ({ label, className = '', ...rest }) => (
+export const Checkbox = ({ label, className = "", ...rest }) => (
 	<div className={`flex items-center space-x-2 ${className}`}>
 		<input
 			{...rest}
