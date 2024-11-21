@@ -35,7 +35,7 @@ const buttonStyles = cva(
 	},
 );
 
-export const Button= ({
+export const Button = ({
 	variant,
 	size,
 	disabled,

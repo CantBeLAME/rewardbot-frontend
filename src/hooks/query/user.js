@@ -1,18 +1,14 @@
 import { apiGetUserByEmail, apiPostUser } from '../../api/user';
-import { useQuery,useMutation } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 
 export const useGetUserByEmail = ({ email }) => {
-	
-	const {
-		data: getUserByEmail,
-	} = useQuery({
+	const { data: getUserByEmail } = useQuery({
 		queryKey: ['user', email],
 		queryFn: () => apiGetUserByEmail({ email }),
 	});
 
 	return { getUserByEmail };
 };
-
 
 export const usePostUser = () => {
 	const { mutate: postUser } = useMutation({
@@ -27,4 +23,3 @@ export const usePostUser = () => {
 
 	return { postUser };
 };
-
