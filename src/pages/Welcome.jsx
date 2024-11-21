@@ -1,12 +1,15 @@
-import React from "react";
-import { useAuth } from "../hooks/auth/useAuth";
+import React from 'react';
+import { useAuth } from '../hooks/auth/useAuth';
 
 export default function Welcome() {
-	 const { user: { username }, loading } = useAuth();
+	const {
+		user: { username },
+		loading,
+	} = useAuth();
 
-	 if (loading) {
-		 return <div>Loading...</div>;
-	 }
+	if (loading) {
+		return <div>Loading...</div>;
+	}
 
 	return (
 		<>
@@ -15,8 +18,9 @@ export default function Welcome() {
 					<h2 className="text-center text-2xl font-bold text-gray-700">
 						Hi {username}!
 					</h2>
-					<p className="flex w-full text-center">Download RewardBot with the Link Below!</p>
-
+					<p className="flex w-full text-center">
+						Download RewardBot with the Link Below!
+					</p>
 				</div>
 			</div>
 		</>
