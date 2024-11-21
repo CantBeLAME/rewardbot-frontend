@@ -1,5 +1,6 @@
-import { axiosDefault, axiosAuth } from './index';
-import navigateTo from '../utils/navigateTo';
+import { axiosDefault, axiosAuth, axiosCanvas } from "./";
+import navigateTo from "../utils/navigateTo";
+import { removeCanvasToken } from "../store/token";
 
 export const apiGetUserByEmail = async ({ email }) => {
 	try {
@@ -7,7 +8,7 @@ export const apiGetUserByEmail = async ({ email }) => {
 		return response.data;
 	} catch (error) {
 		console.log(error);
-		navigateTo('/login');
+		navigateTo("/login");
 	}
 };
 
@@ -18,7 +19,7 @@ export const apiGetUser = async () => {
 		return response.data;
 	} catch (error) {
 		console.log(error);
-		navigateTo('/login');
+		navigateTo("/login");
 	}
 };
 
@@ -28,18 +29,29 @@ export const apiPostUser = async (data) => {
 		return response.data;
 	} catch (error) {
 		console.log(error);
-		navigateTo('/login');
+		navigateTo("/login");
 	}
 };
 
-
 export const apiLogin = async ({ email, password }) => {
 	try {
-		const response = await axiosDefault.post('/login', { email, password });
+		const response = await axiosDefault.post("/login", { email, password });
 
-		return {status: response.status, data: response.data};
+		return { status: response.status, data: response.data };
 	} catch (error) {
 		console.log(error);
-		navigateTo('/login');
+		navigateTo("/login");
 	}
-}
+};
+
+export const apiLogout = async () => {
+	try {
+		const response = await axiosDefault.post("/logout");
+		removeCanvasToken();
+		axiosCanvas.defaults.headers.common["Authorization"] = "";
+		return response.data;
+	} catch (error) {
+		console.log(error);
+		navigateTo("/login");
+	}
+};

@@ -1,3 +1,3 @@
 export default function navigateTo(path) {
-        window.location.href = path;
+	window.location.href = path;
 }

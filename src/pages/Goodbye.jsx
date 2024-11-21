@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function Goodbye() {
-
 	return (
 		<>
 			<div className="flex min-h-screen items-center justify-center bg-gray-100">
@@ -9,7 +8,6 @@ export default function Goodbye() {
 					<h2 className="text-center text-2xl font-bold text-gray-700">
 						Sorry to see you go!
 					</h2>
-					
 				</div>
 			</div>
 		</>

@@ -1,117 +1,76 @@
-// 'use client';
+import React, { useEffect } from "react";
+import Popup from "react-popup";
+import { Input } from "./Form";
+import { Link } from "react-router-dom";
 
-// import * as React from 'react';
-// import { Drawer as DrawerPrimitive } from 'vaul';
+const CanvasTokenPopupContent = ({ onChange }) => {
+	return (
+		<div className="flex flex-col gap-4">
+			<h2 className="text-lg">
+				Please enter your Canvas token to continue.
+			</h2>
+			<Input
+				type="text"
+				placeholder="Canvas Token"
+				name="canvasToken"
+				onChange={onChange}
+				className="w-full rounded border p-2"
+			/>
+			<Link
+				className="flex justify-end text-sm font-bold text-gray-500 underline"
+				to="https://community.canvaslms.com/t5/Canvas-Basics-Guide/How-do-I-manage-API-access-tokens-in-my-user-account/ta-p/615312#:~:text=Mobile%20access%20tokens%20are%20generated,access%20token%20must%20be%20deleted."
+			>
+				How to generate Canvas Access Token
+			</Link>
+		</div>
+	);
+};
 
-// import { cn } from 'src/lib/utils';
+export default function PopUp() {
+	useEffect(() => {
+		Popup.registerPlugin("canvasTokenPopup", function (success, cancel) {
+			let token = "";
 
-// function Popup({
-// 	shouldScaleBackground = true,
-// 	...props
-// }) {
-// 	return (
-// 		<DrawerPrimitive.Root
-// 			shouldScaleBackground={shouldScaleBackground}
-// 			{...props}
-// 		/>
-// 	);
-// }
-// PopUp.displayName = 'PopUp';
+			const handleChange = (e) => {
+				token = e.target.value;
+			};
 
+			this.create({
+				title: "Invalid or Missing Canvas Token",
+				content: <CanvasTokenPopupContent onChange={handleChange} />,
+				buttons: {
+					left: [
+						{
+							text: "Cancel",
+							className: "danger",
+							action: function () {
+								cancel(token);
+								Popup.close();
+							},
+						},
+					],
+					right: [
+						{
+							text: "Save",
+							className: "success",
+							action: function () {
+								success(token);
+								Popup.close();
+							},
+						},
+					],
+				},
+			});
+		});
+	}, []);
 
-
-// const DrawerTrigger = DrawerPrimitive.Trigger;
-
-// const DrawerPortal = DrawerPrimitive.Portal;
-
-// const DrawerClose = DrawerPrimitive.Close;
-
-// const DrawerOverlay = (({className, ...props }, ref) => (
-// 		<DrawerPrimitive.Overlay
-// 			ref={ref}
-// 			className={cn('fixed inset-0 z-50 bg-black/80', className)}
-// 			{...props}
-// 		/>
-// 		));
-// 		DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
-
-// 		const DrawerContent = (({className, children, ...props }, ref) => (
-// 		<DrawerPortal>
-// 			<DrawerOverlay className="m-auto max-w-default" />
-// 			<DrawerPrimitive.Content
-// 				ref={ref}
-// 				className={cn(
-// 					'fixed inset-x-0 bottom-0 z-50 m-auto mt-24 flex h-auto max-w-default flex-col rounded-t-[10px] border bg-background',
-// 					className,
-// 				)}
-// 				{...props}
-// 			>
-// 				<div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
-// 				{children}
-// 			</DrawerPrimitive.Content>
-// 		</DrawerPortal>
-// 		));
-// 		DrawerContent.displayName = 'DrawerContent';
-
-// 		function DrawerHeader({
-// 			className,
-//     ...props
-// }) {
-//     return (
-// 			<div
-// 				className={cn(
-// 					'grid gap-1.5 p-4 text-center sm:text-left',
-// 					className,
-// 				)}
-// 				{...props}
-// 			/>
-// 			);
-// }
-// 			DrawerHeader.displayName = 'DrawerHeader';
-
-// 			function DrawerFooter({
-// 				className,
-//     ...props
-// }) {
-//     return (
-// 				<div
-// 					className={cn('mt-auto flex flex-col gap-2 p-4', className)}
-// 					{...props}
-// 				/>
-// 				);
-// }
-// 				DrawerFooter.displayName = 'DrawerFooter';
-
-// 				const DrawerTitle = (({className, ...props }, ref) => (
-// 				<DrawerPrimitive.Title
-// 					ref={ref}
-// 					className={cn(
-// 						'text-lg font-semibold leading-none tracking-tight',
-// 						className,
-// 					)}
-// 					{...props}
-// 				/>
-// 				));
-// 				DrawerTitle.displayName = DrawerPrimitive.Title.displayName;
-
-// 				const DrawerDescription = (({className, ...props }, ref) => (
-// 				<DrawerPrimitive.Description
-// 					ref={ref}
-// 					className={cn('text-muted-foreground text-sm', className)}
-// 					{...props}
-// 				/>
-// 				));
-// 				DrawerDescription.displayName = DrawerPrimitive.Description.displayName;
-
-// 				export {
-// 					Drawer,
-// 					DrawerPortal,
-// 					DrawerOverlay,
-// 					DrawerTrigger,
-// 					DrawerClose,
-// 					DrawerContent,
-// 					DrawerHeader,
-// 					DrawerFooter,
-// 					DrawerTitle,
-// 					DrawerDescription,
-// };
+	return (
+		<Popup
+			className="mm-popup"
+			btnClass="mm-popup__btn"
+			closeBtn={false}
+			wildClasses={false}
+			escToClose={true}
+		/>
+	);
+}
