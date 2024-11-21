@@ -3,6 +3,7 @@ import { Button } from "../../components/Button";
 import { usePostUser } from "../../hooks/query/user";
 import { apiGetUserByEmail } from "../../api/user";
 import { Link, useNavigate } from "react-router-dom";
+import Popup from "react-popup"
 
 export default function CreateAccount() {
 	const { postUser } = usePostUser();
@@ -26,7 +27,7 @@ export default function CreateAccount() {
 			{ username, email, password, canvasToken },
 			{
 				onSuccess: () => {
-					alert("User created successfully");
+					Popup.alert("User created successfully");
 					navigate("/login");
 				},
 				onError: () => alert("User creation failed"),
