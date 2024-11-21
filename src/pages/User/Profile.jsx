@@ -1,13 +1,19 @@
 import React from "react";
-import { useAuth } from "../hooks/auth/useAuth";
-// import { useAuthStore } from "../store/auth";
+import { useAuth, useCanvasAuth } from "../../hooks/auth/useAuth";
 
 const ProfilePage = () => {
 	const {
-		user: { username, email, createdAt },
+		user: { email, createdAt },
+		loading,
 	} = useAuth();
+	const {
+		canvasUser: { image, firstname, lastname },
+		loadingCanvas,
+	} = useCanvasAuth();
 
-	// const { setUserInfo } = useAuthStore();
+	if (loading || loadingCanvas) {
+		return <div>Loading...</div>;
+	}
 
 	return (
 		<div className="flex min-h-screen items-center justify-center bg-gray-100">
@@ -15,16 +21,12 @@ const ProfilePage = () => {
 				<div className="flex flex-col items-center">
 					<img
 						className="h-24 w-24 rounded-full border-4 border-blue-500"
-						src="https://via.placeholder.com/150"
+						src={image ?? "https://via.placeholder.com/150"}
 						alt="User Avatar"
 					/>
 					<h2 className="mt-4 text-2xl font-bold text-gray-800">
-						{username}
+						{firstname} {lastname}
 					</h2>
-					<p className="mt-2 text-center text-gray-600">
-						Full-stack developer passionate about building amazing
-						user experiences.
-					</p>
 				</div>
 				<div className="mt-6 space-y-4">
 					<div className="flex items-center justify-between">
@@ -40,9 +42,6 @@ const ProfilePage = () => {
 						</span>
 					</div>
 				</div>
-				<button className="mt-6 w-full rounded-lg bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600">
-					Edit Profile
-				</button>
 			</div>
 		</div>
 	);

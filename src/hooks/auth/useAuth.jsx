@@ -1,5 +1,7 @@
 import { apiGetUser } from "../../api/user";
 import { useEffect, useState } from "react";
+import { validateToken, getCanvasUser } from "../../api/canvas";
+import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
 	const [user, setUser] = useState(null);
@@ -29,5 +31,35 @@ export const useAuth = () => {
 			createdAt: user?.createdAt,
 		},
 		loading,
+	};
+};
+
+export const useCanvasAuth = () => {
+	const [user, setUser] = useState(null);
+	const [loading, setLoading] = useState(true);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		validateToken(
+			getCanvasUser,
+			(data) => {
+				setUser(data);
+				setLoading(false);
+			},
+			() => {
+				navigate("/login");
+			},
+		);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	return {
+		canvasUser: {
+			image: user?.avatar_url,
+			firstname: user?.first_name,
+			id: user?.id,
+			lastname: user?.last_name,
+		},
+		loadingCanvas: loading,
 	};
 };

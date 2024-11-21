@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getCanvasCourse, validateToken } from "../api/canvas";
-import { useAuth } from "../hooks/auth/useAuth";
+import { getCanvasCourse, validateToken } from "../../api/canvas";
+import { useAuth } from "../../hooks/auth/useAuth";
 import { useNavigate } from "react-router-dom";
 
 export default function Statistics() {
@@ -11,11 +11,11 @@ export default function Statistics() {
 	useEffect(() => {
 		validateToken(
 			getCanvasCourse,
-			() => {
-				navigate("/login");
-			},
 			(data) => {
 				setStats(data);
+			},
+			() => {
+				navigate("/login");
 			},
 		);
 		// eslint-disable-next-line react-hooks/exhaustive-deps

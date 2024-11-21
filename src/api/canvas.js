@@ -17,15 +17,10 @@ export async function getCanvasCourse() {
 		);
 	}
 }
-// eslint-disable-next-line: true react-hooks/exhaustive-deps
+
 export async function getCanvasUser() {
 	try {
-		const canvasToken = getCanvasToken();
-
-		axiosCanvas.defaults.headers.common["Authorization"] =
-			`Bearer ${canvasToken}`;
 		const res = await axiosCanvas.get("/users/self");
-
 		return { status: res.status, data: res.data };
 	} catch (error) {
 		console.error(
@@ -35,7 +30,7 @@ export async function getCanvasUser() {
 	}
 }
 
-export async function validateToken(getCanvasInfo, cancel, save) {
+export async function validateToken(getCanvasInfo, save, cancel) {
 	const attempt = async () => {
 		try {
 			const canvasToken = getCanvasToken();
@@ -47,11 +42,6 @@ export async function validateToken(getCanvasInfo, cancel, save) {
 			save(data);
 		} catch (err) {
 			Popup.plugins().canvasTokenPopup(
-				(value) => {
-					console.log("Cancel clicked. Token value:", value);
-					Popup.close();
-					cancel();
-				},
 				async (token) => {
 					console.log("New token entered:", token);
 					setCanvasToken(token);
@@ -60,6 +50,11 @@ export async function validateToken(getCanvasInfo, cancel, save) {
 
 					// Re-fetch data after saving the new token
 					await attempt();
+				},
+				(value) => {
+					console.log("Cancel clicked. Token value:", value);
+					Popup.close();
+					cancel();
 				},
 			);
 		}

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Popup from "react-popup";
-import { Label, Input } from "./Form";
+import { Input } from "./Form";
 import { Link } from "react-router-dom";
 
 const CanvasTokenPopupContent = ({ onChange }) => {
@@ -28,7 +28,7 @@ const CanvasTokenPopupContent = ({ onChange }) => {
 
 export default function PopUp() {
 	useEffect(() => {
-		Popup.registerPlugin("canvasTokenPopup", function (cancel, success) {
+		Popup.registerPlugin("canvasTokenPopup", function (success, cancel) {
 			let token = "";
 
 			const handleChange = (e) => {

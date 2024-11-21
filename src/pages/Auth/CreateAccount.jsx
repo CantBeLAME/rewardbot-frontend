@@ -1,7 +1,7 @@
-import { Fieldset, Form, Input, Label } from "../components/Form";
-import { Button } from "../components/Button";
-import { usePostUser } from "../hooks/query/user";
-import { apiGetUserByEmail } from "../api/user";
+import { Fieldset, Form, Input, Label } from "../../components/Form";
+import { Button } from "../../components/Button";
+import { usePostUser } from "../../hooks/query/user";
+import { apiGetUserByEmail } from "../../api/user";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function CreateAccount() {

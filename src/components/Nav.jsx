@@ -40,7 +40,7 @@ export default function Nav({ children }) {
 						icon={<FiHome />}
 						label="Home"
 						isOpen={isOpen}
-						to="/welcome"
+						to="/home"
 					/>
 					<NavItem
 						icon={<FiUser />}
@@ -81,7 +81,7 @@ const Logout = ({ isOpen }) => {
 	return (
 		<Link
 			to={"/login"}
-			onCLick={logout}
+			onClick={logout}
 			className={`flex items-center text-gray-300 hover:bg-gray-700 hover:text-white ${isOpen && "px-3"} rounded-lg py-2`}
 		>
 			<span className="text-xl">{<FiLogOut />}</span>

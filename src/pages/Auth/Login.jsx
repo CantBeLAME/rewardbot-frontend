@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Fieldset, Form, Input, Label } from "../components/Form";
-import { Button } from "../components/Button";
-import { apiLogin } from "../api/user";
+import { Fieldset, Form, Input, Label } from "../../components/Form";
+import { Button } from "../../components/Button";
+import { apiLogin } from "../../api/user";
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../store/auth";
-import { setCanvasToken } from "../store/token";
+import { useAuthStore } from "../../store/auth";
+import { setCanvasToken } from "../../store/token";
 import Popup from "react-popup";
 
 export default function Login() {

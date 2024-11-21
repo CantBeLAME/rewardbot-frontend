@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { CreateAccount, Login, Statistics, Welcome, Profile } from "./pages";
+import { CreateAccount, Login, Statistics, Home, Profile } from "./pages";
 import Nav from "./components/Nav";
 import PopUp from "./components/PopUp";
 
@@ -7,16 +7,15 @@ export default function Router() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Home />} />
+				<Route path="/" element={<Main />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/create-account" element={<CreateAccount />} />
 				<Route path="/uninstall" element={<About />} />
-
 				<Route
-					path="/welcome"
+					path="/home"
 					element={
 						<Nav>
-							<Welcome />
+							<Home />
 						</Nav>
 					}
 				/>
@@ -46,6 +45,7 @@ export default function Router() {
 function About() {
 	return <h2>About</h2>;
 }
-function Home() {
-	return <h2>Home</h2>;
+
+function Main() {
+	return <h2>Main</h2>;
 }
