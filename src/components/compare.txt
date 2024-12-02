@@ -1,0 +1,73 @@
+
+    > but was:<...list
+    4764
+    hashtable
+    [1 65
+    2 129
+    12 12
+    total records 7
+    search failed there is no record with id 17
+    delete failed there is no record with id 17
+    delete failed there is no record with id 49
+    record with id 12 successfully deleted from the database
+    freeblock list
+    37650 4764
+    hashtable
+    1 65
+    2 129
+    12 tombstone
+    total records 6
+    search failed there is no record with id 17
+    successfully inserted record with id 80
+    id 80 title t1
+    date 0610051600 length 90 x 10 y 10 cost 45
+    description d1
+    keywords k1
+    size 50
+    memory pool expanded to 510 bytes
+    memory pool expanded to 540 bytes
+    successfully inserted record with id 90
+    id 90 title t1
+    date 0610051600 length 90 x 10 y 10 cost 45
+    description d1
+    keywords k1
+    size 50
+    freeblock list
+    52614
+    hashtable
+    0 80
+    1 65
+    2 129
+    10 90
+    12 tombstone
+    total records 8
+    found record with id 90
+    id 90 title t1
+    date 0610051600 length 90 x 10 y 10 cost 45
+    description d1
+    keywords k1
+    record with id 80 successfully deleted from the database
+    record with id 90 successfully deleted from the database
+    search failed there is no record with id 90
+    freeblock list
+    37650 47664
+    hashtable
+    0 tombstone
+    1 65
+    2 129
+    10 tombstone
+    12 tombstone
+    total records 6
+    record with id 65 successfully deleted from the database
+    delete failed there is no record with id 1
+    record with id 129 successfully deleted from the database
+    freeblock list
+    326214
+    hashtable
+    0 tombstone
+    1 tombstone
+    2 tombstone
+    10 tombstone
+    12 tombstone
+    total records 4]
+    >

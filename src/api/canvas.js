@@ -27,23 +27,28 @@ export async function getAssignmentsTimeRange() {
 		}&per_page=1000`;
 		return await getPaginatedRequest(initialURL, allPages);
 	}
-	/* Expand bounds by 1 day to account for possible time zone differences with api. */
-	// Assuming startDate and endDate are strings or Date objects:
-	const startDate = new Date("2024-12-01"); // Example start date
-	const endDate = new Date("2024-12-10"); // Example end date
+	try {
+		const startDate = new Date("2024-09-01");
+		const endDate = new Date("2024-12-10");
 
-	// Create new Date objects for manipulation
-	const st = new Date(startDate);
-	st.setDate(st.getDate() - 1); // Subtract 1 day
+		const st = new Date(startDate);
+		st.setDate(st.getDate() - 1); // Adjust for time zones
+		const en = new Date(endDate);
+		en.setDate(en.getDate() + 1);
 
-	const en = new Date(endDate);
-	en.setDate(en.getDate() + 1); // Add 1 day
+		const startStr = st.toISOString().split("T")[0];
+		const endStr = en.toISOString().split("T")[0];
 
-	const startStr = st.toISOString().split("T")[0];
-	const endStr = en.toISOString().split("T")[0];
-	const data = await getAllAssignmentsRequest(startStr, endStr);
+		// console.log("Fetching assignments between:", startStr, endStr);
 
-	return { data: convertPlannerAssignments(data || []) };
+		const data = await getAllAssignmentsRequest(startStr, endStr);
+		// console.log("Fetched Data:", data);
+
+		return { data: convertPlannerAssignments(data || []) };
+	} catch (err) {
+		console.error("Error in getAssignmentsTimeRange:", err.message);
+		return { data: [] }; // Return empty data on error
+	}
 }
 
 export async function getCanvasUser() {
@@ -104,20 +109,26 @@ const parseLinkHeader = (link) => {
 };
 
 export async function getPaginatedRequest(url, recurse = false) {
+	const results = [];
 	try {
-		const res = await axiosCanvas.get(url);
+		let nextUrl = url;
+		// console.log("Fetching paginated data from:", nextUrl);
+		while (nextUrl) {
+			const res = await axiosCanvas.get(nextUrl);
+			results.push(...res.data);
 
-		if (recurse && "link" in res.headers) {
-			const parsed = parseLinkHeader(res.headers["link"]);
-			if (parsed && "next" in parsed && parsed["next"].url !== url)
-				return res.data.concat(
-					await getPaginatedRequest(parsed["next"].url, true),
-				);
+			// Parse next URL from "link" header
+			const links = parseLinkHeader(res.headers.link);
+			nextUrl = links?.next?.url || null; // Stop if no "next" link
+			if (nextUrl) {
+				// Remove the base URL
+				nextUrl = nextUrl.replace("https://canvas.vt.edu/api/v1/", "");
+			}
+
+			// console.log("Links:", links, nextUrl);
 		}
-
-		return res.data;
 	} catch (err) {
-		console.error(err);
-		return []; // still return all successful pages if error instead of hanging
+		console.error("Error during pagination:", err.message);
 	}
+	return results;
 }

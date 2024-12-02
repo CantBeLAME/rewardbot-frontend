@@ -55,15 +55,16 @@ export function convertPlannerAssignments(assignments) {
 			points_possible: assignment.plannable.points_possible,
 			submition_status: assignment.submissions
 				? assignment.submissions.submitted
-					? AssignmentStatus.COMPLETE
-					: assignment.submissions.late
+					? assignment.submissions.late
 						? AssignmentStatus.LATE
-						: assignment.submissions.missing
-							? AssignmentStatus.MISSING
-							: assignment.submissions.graded
-								? AssignmentStatus.COMPLETE
-								: AssignmentStatus.NOSUBMISSION
+						: AssignmentStatus.COMPLETE
+					: assignment.submissions.missing
+						? AssignmentStatus.MISSING
+						: assignment.submissions.graded
+							? AssignmentStatus.COMPLETE
+							: AssignmentStatus.NOSUBMISSION
 				: AssignmentStatus.NOSUBMISSION,
+
 			graded: assignment.submissions
 				? assignment.submissions.excused ||
 					assignment.submissions.graded

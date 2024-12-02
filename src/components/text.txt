@@ -1,0 +1,92 @@
+4764
+    hashtable
+    [0 129
+    1 1
+    2 17
+    4 33
+    7 49
+    11 65
+    12 12
+    total records 7
+    found record with id 17
+    id 17 title t1 with a lot more text so that it is longer
+    date 0610051600 length 90 x 10 y 10 cost 45
+    description d1 here is more stuff
+    keywords k1
+    record with id 17 successfully deleted from the database
+    record with id 49 successfully deleted from the database
+    record with id 12 successfully deleted from the database
+    freeblock list
+    50111 27650 37650 4764
+    hashtable
+    0 129
+    1 1
+    2 tombstone
+    4 33
+    7 tombstone
+    11 65
+    12 tombstone
+    total records 4
+    search failed there is no record with id 17
+    successfully inserted record with id 80
+    id 80 title t1
+    date 0610051600 length 90 x 10 y 10 cost 45
+    description d1
+    keywords k1
+    size 50
+    successfully inserted record with id 90
+    id 90 title t1
+    date 0610051600 length 90 x 10 y 10 cost 45
+    description d1
+    keywords k1
+    size 50
+    freeblock list
+    15011 27650 37650 4764
+    hashtable
+    0 129
+    1 1
+    2 tombstone
+    3 80
+    4 33
+    7 tombstone
+    10 90
+    11 65
+    12 tombstone
+    total records 6
+    found record with id 90
+    id 90 title t1
+    date 0610051600 length 90 x 10 y 10 cost 45
+    description d1
+    keywords k1
+    record with id 80 successfully deleted from the database
+    record with id 90 successfully deleted from the database
+    search failed there is no record with id 90
+    freeblock list
+    50111 27650 37650 4764
+    hashtable
+    0 129
+    1 1
+    2 tombstone
+    3 tombstone
+    4 33
+    7 tombstone
+    10 tombstone
+    11 65
+    12 tombstone
+    total records 4
+    record with id 65 successfully deleted from the database
+    record with id 1 successfully deleted from the database
+    record with id 129 successfully deleted from the database
+    freeblock list
+    0161 276204
+    hashtable
+    0 tombstone
+    1 tombstone
+    2 tombstone
+    3 tombstone
+    4 33
+    7 tombstone
+    10 tombstone
+    11 tombstone
+    12 tombstone
+    total records 1]
