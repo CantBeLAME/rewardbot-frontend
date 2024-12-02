@@ -1,35 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { getCanvasCourse, validateToken } from "../../api/canvas";
+import { getAssignmentsTimeRange, validateToken } from "../../api/canvas";
 import { useAuth } from "../../hooks/auth/useAuth";
 import { useNavigate } from "react-router-dom";
+import ToDoList from "../../components/ToDoList";
+import { AssignmentType } from "../../const/assignments";
+import DataHandle from "../../components/DataHandle";
 
 export default function Statistics() {
 	const { loading } = useAuth();
 	const navigate = useNavigate();
-	const [stats, setStats] = useState([]);
+	const [planner, setPlanner] = useState([]);
 
 	useEffect(() => {
 		validateToken(
-			getCanvasCourse,
+			getAssignmentsTimeRange,
 			(data) => {
-				setStats(data);
+				setPlanner(data?.filter(({ type }) => (type === AssignmentType.ASSIGNMENT || type === AssignmentType.QUIZ || type === AssignmentType.DISCUSSION)) ?? []);
 			},
 			() => {
-				navigate("/login");
+				navigate("/");
 			},
 		);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	const sortedData = [...planner].sort((a, b) =>
+		new Date(a.due_at) - new Date(b.due_at)
+	);
 
 	if (loading) {
 		return <div>Loading...</div>;
 	}
 
 	return (
-		<div>
-			{stats.map(({ id }) => (
-				<p key={id}>{id}</p>
-			))}
+		<div className="flex flex-row">
+			<ToDoList data={sortedData} />
+			<DataHandle data={planner}/>
 		</div>
 	);
 }

@@ -12,19 +12,17 @@ export default function Nav({ children }) {
 	};
 
 	return (
-		<div className="flex">
+		<div className={`flex `}>
 			{/* Sidebar */}
 			<div
-				className={`transition-width flex h-screen flex-col bg-gray-800 p-5 text-white duration-300 ${
-					isOpen ? "w-64" : "w-16"
-				}`}
+				className={`transition-width flex h-screen flex-col bg-gray-800 p-5 text-white duration-300 ${isOpen ? "w-64" : "w-16" }`}
 			>
 				{/* Logo and Menu Button */}
-				<div className="flex items-center justify-between">
+				<div className="flex items-center justify-between w-full">
 					<div
 						className={`text-xl font-bold ${!isOpen && "hidden"} transition duration-300`}
 					>
-						MyApp
+						Reward Bot
 					</div>
 					<button
 						className="text-gray-400 hover:text-white"
@@ -35,7 +33,7 @@ export default function Nav({ children }) {
 				</div>
 
 				{/* Navigation Links */}
-				<nav className="mt-10 space-y-4">
+				<nav className="mt-10 space-y-4 w-full">
 					<NavItem
 						icon={<FiHome />}
 						label="Home"
@@ -59,7 +57,7 @@ export default function Nav({ children }) {
 			</div>
 
 			{/* Main Content */}
-			<div className="flex-grow bg-gray-100 p-6">{children}</div>
+			<div className={`flex-grow bg-gray-100 p-6 w-[calc(100%-256px)]`} >{children}</div>
 		</div>
 	);
 }
@@ -80,7 +78,7 @@ const Logout = ({ isOpen }) => {
 	};
 	return (
 		<Link
-			to={"/login"}
+			to={"/"}
 			onClick={logout}
 			className={`flex items-center text-gray-300 hover:bg-gray-700 hover:text-white ${isOpen && "px-3"} rounded-lg py-2`}
 		>

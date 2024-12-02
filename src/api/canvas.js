@@ -1,9 +1,8 @@
 import { axiosCanvas } from ".";
-import axios from "axios";
-import JSONBigInt from "json-bigint";
 import { getCanvasToken } from "../store/token";
 import Popup from "react-popup";
 import { setCanvasToken } from "../store/token";
+import { convertPlannerAssignments } from "../utils/convertAssignments";
 
 export async function getCanvasCourse() {
 	try {
@@ -16,6 +15,35 @@ export async function getCanvasCourse() {
 			error.response?.data || error.message,
 		);
 	}
+}
+
+/* Get assignments from api */
+export async function getAssignmentsTimeRange() {
+	async function getAllAssignmentsRequest(start, end, allPages = true) {
+		// assumption: this request will succeed, otherwise we should throw a fatal error and not load
+
+		const initialURL = `/planner/items?start_date=${start}${
+			end ? "&end_date=" + end : ""
+		}&per_page=1000`;
+		return await getPaginatedRequest(initialURL, allPages);
+	}
+	/* Expand bounds by 1 day to account for possible time zone differences with api. */
+	// Assuming startDate and endDate are strings or Date objects:
+	const startDate = new Date("2024-12-01"); // Example start date
+	const endDate = new Date("2024-12-10"); // Example end date
+
+	// Create new Date objects for manipulation
+	const st = new Date(startDate);
+	st.setDate(st.getDate() - 1); // Subtract 1 day
+
+	const en = new Date(endDate);
+	en.setDate(en.getDate() + 1); // Add 1 day
+
+	const startStr = st.toISOString().split("T")[0];
+	const endStr = en.toISOString().split("T")[0];
+	const data = await getAllAssignmentsRequest(startStr, endStr);
+
+	return { data: convertPlannerAssignments(data || []) };
 }
 
 export async function getCanvasUser() {
@@ -77,9 +105,7 @@ const parseLinkHeader = (link) => {
 
 export async function getPaginatedRequest(url, recurse = false) {
 	try {
-		const res = await axios.get(url, {
-			transformResponse: [(data) => JSONBigInt.parse(data)],
-		});
+		const res = await axiosCanvas.get(url);
 
 		if (recurse && "link" in res.headers) {
 			const parsed = parseLinkHeader(res.headers["link"]);
