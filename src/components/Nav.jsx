@@ -57,7 +57,7 @@ export default function Nav({ children }) {
 			</div>
 
 			{/* Main Content */}
-			<div className={`flex-grow bg-gray-100 p-6 w-[calc(100%-256px)]`} >{children}</div>
+			<div className={`flex-grow bg-gray-100 p-6 w-[calc(100%-256px)] h-[100vh]`} >{children}</div>
 		</div>
 	);
 }

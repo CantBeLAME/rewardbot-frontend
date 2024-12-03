@@ -1,5 +1,6 @@
-import { useAuth, useCanvasAuth } from "../hooks/auth/useAuth";
-import { Sidebar, Content, Title } from "../components/Sidebar";
+import { useAuth, useCanvasAuth } from "../../hooks/auth/useAuth";
+import { Content, Title } from "../Sidebar";
+import Container from "../Container";
 
 export default function Profile() {
     const {
@@ -16,7 +17,7 @@ export default function Profile() {
     }
 
     return (
-        <Sidebar>
+        <Container className={"flex justify-center pt-16"}>
             <Content>
                 <img
                     className="h-24 w-24 rounded-full border-4 border-blue-500"
@@ -42,6 +43,6 @@ export default function Profile() {
                     </div>
                 </div>
             </Content>
-        </Sidebar>
+        </Container>
     );
 };

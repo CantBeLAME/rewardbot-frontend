@@ -1,18 +1,18 @@
 import React from "react";
 
 export const Sidebar = ({ children }) => {
-    return <div className="w-64 h-full p-6 bg-white shadow-md">{children}</div>;
+    return <div className="min-w-48 lg:min-w-64 w-1/3 h-full overflow-y-scroll">{children}</div>;
 };
 
 Sidebar.Title = ({ children }) => {
     return <h2 className="mt-4 text-2xl font-bold text-gray-800">{children}</h2>;
 };
 Sidebar.Content = ({ children }) => {
-    return <div className="overflow-y-scroll flex flex-col items-center">{children}</div>;
+    return <div className="flex flex-col items-center">{children}</div>;
 };
 
 export const Main = ({ children }) => {
-    return <div className="p-6 w-full bg-gray-100">{children}</div>;
+    return <div className="flex flex-col gap-6 w-2/3 h-full">{children}</div>;
 };
 
 

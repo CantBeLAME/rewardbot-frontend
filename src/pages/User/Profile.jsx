@@ -1,15 +1,19 @@
 import React from "react";
-import Profile from "../../components/Profile";
-import Settings from "../../components/Settings";
+import Profile from "../../components/Profile/Profile";
+import Settings from "../../components/Profile/Settings";
+import { Main, Sidebar } from "../../components/Sidebar";
 
 export default function ProfilePage() {
 
 	return (
-		<div className="flex min-h-screen">
-			<Profile />
-			<div className="flex-grow">
+		<div className="flex h-full w-full">
+			<Sidebar>
+				<Profile />
+			</Sidebar>
+			<Main>
 				<Settings />
-			</div>
+				<Settings />
+			</Main>
 		</div>
 	);
 };
