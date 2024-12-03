@@ -1,9 +1,8 @@
 import { axiosCanvas } from ".";
-import axios from "axios";
-import JSONBigInt from "json-bigint";
 import { getCanvasToken } from "../store/token";
 import Popup from "react-popup";
 import { setCanvasToken } from "../store/token";
+import { convertPlannerAssignments } from "../utils/convertAssignments";
 
 export async function getCanvasCourse() {
 	try {
@@ -15,6 +14,40 @@ export async function getCanvasCourse() {
 			"Error fetching Canvas course data:",
 			error.response?.data || error.message,
 		);
+	}
+}
+
+/* Get assignments from api */
+export async function getAssignmentsTimeRange() {
+	async function getAllAssignmentsRequest(start, end, allPages = true) {
+		// assumption: this request will succeed, otherwise we should throw a fatal error and not load
+
+		const initialURL = `/planner/items?start_date=${start}${
+			end ? "&end_date=" + end : ""
+		}&per_page=1000`;
+		return await getPaginatedRequest(initialURL, allPages);
+	}
+	try {
+		const startDate = new Date("2024-09-01");
+		const endDate = new Date("2024-12-10");
+
+		const st = new Date(startDate);
+		st.setDate(st.getDate() - 1); // Adjust for time zones
+		const en = new Date(endDate);
+		en.setDate(en.getDate() + 1);
+
+		const startStr = st.toISOString().split("T")[0];
+		const endStr = en.toISOString().split("T")[0];
+
+		// console.log("Fetching assignments between:", startStr, endStr);
+
+		const data = await getAllAssignmentsRequest(startStr, endStr);
+		// console.log("Fetched Data:", data);
+
+		return { data: convertPlannerAssignments(data || []) };
+	} catch (err) {
+		console.error("Error in getAssignmentsTimeRange:", err.message);
+		return { data: [] }; // Return empty data on error
 	}
 }
 
@@ -76,22 +109,26 @@ const parseLinkHeader = (link) => {
 };
 
 export async function getPaginatedRequest(url, recurse = false) {
+	const results = [];
 	try {
-		const res = await axios.get(url, {
-			transformResponse: [(data) => JSONBigInt.parse(data)],
-		});
+		let nextUrl = url;
+		// console.log("Fetching paginated data from:", nextUrl);
+		while (nextUrl) {
+			const res = await axiosCanvas.get(nextUrl);
+			results.push(...res.data);
 
-		if (recurse && "link" in res.headers) {
-			const parsed = parseLinkHeader(res.headers["link"]);
-			if (parsed && "next" in parsed && parsed["next"].url !== url)
-				return res.data.concat(
-					await getPaginatedRequest(parsed["next"].url, true),
-				);
+			// Parse next URL from "link" header
+			const links = parseLinkHeader(res.headers.link);
+			nextUrl = links?.next?.url || null; // Stop if no "next" link
+			if (nextUrl) {
+				// Remove the base URL
+				nextUrl = nextUrl.replace("https://canvas.vt.edu/api/v1/", "");
+			}
+
+			// console.log("Links:", links, nextUrl);
 		}
-
-		return res.data;
 	} catch (err) {
-		console.error(err);
-		return []; // still return all successful pages if error instead of hanging
+		console.error("Error during pagination:", err.message);
 	}
+	return results;
 }

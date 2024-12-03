@@ -7,8 +7,7 @@ export default function Router() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Main />} />
-				<Route path="/login" element={<Login />} />
+				<Route path="/" element={<Login />} />
 				<Route path="/create-account" element={<CreateAccount />} />
 				<Route path="/uninstall" element={<About />} />
 				<Route
@@ -46,6 +45,6 @@ function About() {
 	return <h2>About</h2>;
 }
 
-function Main() {
-	return <h2>Main</h2>;
-}
+// function Main() {
+// 	return <h2>Main</h2>;
+// }

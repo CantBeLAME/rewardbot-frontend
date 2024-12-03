@@ -47,7 +47,7 @@ export const useCanvasAuth = () => {
 				setLoading(false);
 			},
 			() => {
-				navigate("/login");
+				navigate("/");
 			},
 		);
 		// eslint-disable-next-line react-hooks/exhaustive-deps

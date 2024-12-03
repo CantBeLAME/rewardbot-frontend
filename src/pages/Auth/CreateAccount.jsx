@@ -28,7 +28,7 @@ export default function CreateAccount() {
 			{
 				onSuccess: () => {
 					Popup.alert("User created successfully");
-					navigate("/login");
+					navigate("/");
 				},
 				onError: () => alert("User creation failed"),
 			},
