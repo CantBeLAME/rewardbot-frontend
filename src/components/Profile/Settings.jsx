@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from '../Container';
+import Radio from '../Radio';
 
 export default function Settings() {
 
@@ -10,6 +11,7 @@ export default function Settings() {
                 todo list week month day
                 show completed
             </div>
+            <Radio/>
         </Container>
     );
 };

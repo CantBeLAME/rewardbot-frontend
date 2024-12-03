@@ -64,7 +64,6 @@ export function convertPlannerAssignments(assignments) {
 							? AssignmentStatus.COMPLETE
 							: AssignmentStatus.NOSUBMISSION
 				: AssignmentStatus.NOSUBMISSION,
-
 			graded: assignment.submissions
 				? assignment.submissions.excused ||
 					assignment.submissions.graded
