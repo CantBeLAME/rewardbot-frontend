@@ -1,7 +1,6 @@
 {
   "name": "reward-bot",
   "version": "0.1.0",
-  "homepage": "https://cantbelame.github.io/rewardbot-frontend/",
   "private": true,
   "dependencies": {
     "@tanstack/react-query": "^5.60.5",

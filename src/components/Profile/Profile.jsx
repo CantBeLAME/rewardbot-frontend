@@ -1,20 +1,10 @@
-import { useAuth, useCanvasAuth } from "../../hooks/auth/useAuth";
+
 import { Content, Title } from "../Sidebar";
 import Container from "../Container";
 
-export default function Profile() {
-    const {
-        user: { email, createdAt },
-        loading,
-    } = useAuth();
-    const {
-        canvasUser: { image, firstname, lastname },
-        loadingCanvas,
-    } = useCanvasAuth();
-
-    if (loading || loadingCanvas) {
-        return <div>Loading...</div>;
-    }
+export default function Profile({
+    user: { email, createdAt },
+    canvasUser: { image, firstname, lastname } }) {
 
     return (
         <Container className={"flex justify-center pt-16"}>

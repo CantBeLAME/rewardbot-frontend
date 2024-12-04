@@ -29,6 +29,8 @@ export const useAuth = () => {
 			password: user?.password,
 			canvasToken: user?.canvasToken,
 			createdAt: user?.createdAt,
+			option: user?.option,
+			showCompleted: user?.showCompleted,
 		},
 		loading,
 	};
