@@ -55,3 +55,27 @@ export const apiLogout = async () => {
 		navigateTo("/");
 	}
 };
+
+export const apiOption = async ({ id, option }) => {
+	try {
+		const response = await axiosAuth.patch(`/user/${id}/option`, {
+			option,
+		});
+		console.log(response);
+
+		return response.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const apiShowCompleted = async ({ id, showCompleted }) => {
+	try {
+		const response = await axiosAuth.patch(`/user/${id}/showCompleted`, {
+			showCompleted,
+		});
+		return response.data;
+	} catch (error) {
+		console.log(error);
+	}
+};

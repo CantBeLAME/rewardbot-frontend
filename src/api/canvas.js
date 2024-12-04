@@ -6,7 +6,25 @@ import { convertPlannerAssignments } from "../utils/convertAssignments";
 
 export async function getCanvasCourse() {
 	try {
-		const { status, data } = await axiosCanvas.get("/courses");
+		const { status, data } = await axiosCanvas.get("courses");
+
+		return { status, data };
+	} catch (error) {
+		console.log(
+			"Error fetching Canvas course data:",
+			error.response?.data || error.message,
+		);
+	}
+}
+
+export async function putMarkComplete({ id, complete }) {
+	try {
+		const { status, data } = await axiosCanvas.put(
+			`planner/overrides/${id}`,
+			{
+				marked_complete: complete ? "true" : "false",
+			},
+		);
 
 		return { status, data };
 	} catch (error) {
@@ -18,22 +36,39 @@ export async function getCanvasCourse() {
 }
 
 /* Get assignments from api */
-export async function getAssignmentsTimeRange() {
+export async function getAssignmentsTimeRange(option) {
 	async function getAllAssignmentsRequest(start, end, allPages = true) {
 		// assumption: this request will succeed, otherwise we should throw a fatal error and not load
 
-		const initialURL = `/planner/items?start_date=${start}${
+		const initialURL = `planner/items?start_date=${start}${
 			end ? "&end_date=" + end : ""
 		}&per_page=1000`;
 		return await getPaginatedRequest(initialURL, allPages);
 	}
 	try {
-		const startDate = new Date("2024-09-01");
-		const endDate = new Date("2024-12-10");
+		const now = new Date();
+		const options = {
+			Day: {
+				start: new Date(now),
+				end: new Date(now),
+			},
+			Week: {
+				start: new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000),
+				end: new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000),
+			},
+			Month: {
+				start: new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000),
+				end: new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000),
+			},
+			Semester: {
+				start: new Date("2024-08-26"),
+				end: new Date("2024-12-12"),
+			},
+		};
 
-		const st = new Date(startDate);
+		const st = options[option]?.start ?? options["Day"]?.start;
 		st.setDate(st.getDate() - 1); // Adjust for time zones
-		const en = new Date(endDate);
+		const en = options[option]?.end ?? options["Day"]?.end;
 		en.setDate(en.getDate() + 1);
 
 		const startStr = st.toISOString().split("T")[0];
@@ -53,7 +88,7 @@ export async function getAssignmentsTimeRange() {
 
 export async function getCanvasUser() {
 	try {
-		const res = await axiosCanvas.get("/users/self");
+		const res = await axiosCanvas.get("users/self");
 		return { status: res.status, data: res.data };
 	} catch (error) {
 		console.error(

@@ -86,7 +86,7 @@ export default function DataHandle({ data }) {
 	}, [data]);
 
 	return (
-		<div ref={containerRef} className="ml-6 flex h-full w-full">
+		<div ref={containerRef} className="flex h-full w-full">
 			<Container className={"flex items-center justify-center"}>
 				<ResponsiveContainer width="100%" height={700}>
 					<BarChart

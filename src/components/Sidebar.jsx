@@ -18,7 +18,9 @@ Sidebar.Content = ({ children }) => {
 };
 
 export const Main = ({ children }) => {
-	return <div className="flex h-full w-2/3 flex-col gap-6">{children}</div>;
+	return (
+		<div className="flex h-full w-2/3 flex-col gap-6 pl-6">{children}</div>
+	);
 };
 
 export const Title = Sidebar.Title;
