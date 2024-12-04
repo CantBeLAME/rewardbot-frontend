@@ -2,6 +2,7 @@
 	"name": "reward-bot",
 	"version": "0.1.0",
 	"private": true,
+	"homepage": "https://CantBeLAME.github.io/rewardbot-frontend",
 	"dependencies": {
 		"@tanstack/react-query": "^5.60.5",
 		"@testing-library/jest-dom": "^5.17.0",
