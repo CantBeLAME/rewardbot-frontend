@@ -13,6 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Configure Git Identity
+        run: |
+          git config --global user.name "yoonlee201"
+          git config --global user.email "lee.yoonje802@gmail.com"
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
