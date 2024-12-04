@@ -33,6 +33,8 @@ export default function DataHandle({ data }) {
 		return () => {
 			window.removeEventListener("resize", updateWidth);
 		};
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [containerRef, containerRef.current, containerRef.current?.offsetWidth]);
 
 	useEffect(() => {
