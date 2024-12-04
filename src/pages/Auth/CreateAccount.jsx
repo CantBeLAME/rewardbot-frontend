@@ -3,7 +3,7 @@ import { Button } from "../../components/Button";
 import { usePostUser } from "../../hooks/query/user";
 import { apiGetUserByEmail } from "../../api/user";
 import { Link, useNavigate } from "react-router-dom";
-import Popup from "react-popup"
+import Popup from "react-popup";
 
 export default function CreateAccount() {
 	const { postUser } = usePostUser();

@@ -74,6 +74,7 @@ export function convertPlannerAssignments(assignments) {
 			marked_complete:
 				assignment.planner_override?.marked_complete ||
 				assignment.submissions?.submitted ||
+				assignment.submissions?.graded ||
 				assignment.planner_override?.dismissed ||
 				(assignment.plannable_type === AssignmentType.ANNOUNCEMENT &&
 					assignment.plannable.read_state === "read"),

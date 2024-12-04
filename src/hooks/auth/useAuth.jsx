@@ -24,11 +24,14 @@ export const useAuth = () => {
 
 	return {
 		user: {
+			id: user?._id,
 			username: user?.username,
 			email: user?.email,
 			password: user?.password,
 			canvasToken: user?.canvasToken,
 			createdAt: user?.createdAt,
+			option: user?.option,
+			showCompleted: user?.showCompleted,
 		},
 		loading,
 	};

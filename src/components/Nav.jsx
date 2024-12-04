@@ -12,13 +12,13 @@ export default function Nav({ children }) {
 	};
 
 	return (
-		<div className={`flex `}>
+		<div className={`flex`}>
 			{/* Sidebar */}
 			<div
-				className={`transition-width flex h-screen flex-col bg-gray-800 p-5 text-white duration-300 ${isOpen ? "w-64" : "w-16" }`}
+				className={`transition-width flex h-screen flex-col bg-gray-800 p-5 text-white duration-300 ${isOpen ? "w-64" : "w-16"}`}
 			>
 				{/* Logo and Menu Button */}
-				<div className="flex items-center justify-between w-full">
+				<div className="flex w-full items-center justify-between">
 					<div
 						className={`text-xl font-bold ${!isOpen && "hidden"} transition duration-300`}
 					>
@@ -33,7 +33,7 @@ export default function Nav({ children }) {
 				</div>
 
 				{/* Navigation Links */}
-				<nav className="mt-10 space-y-4 w-full">
+				<nav className="mt-10 w-full space-y-4">
 					<NavItem
 						icon={<FiHome />}
 						label="Home"
@@ -57,7 +57,11 @@ export default function Nav({ children }) {
 			</div>
 
 			{/* Main Content */}
-			<div className={`flex-grow bg-gray-100 p-6 w-[calc(100%-256px)] h-[100vh]`} >{children}</div>
+			<div
+				className={`h-[100vh] w-[calc(100%-256px)] flex-grow bg-gray-100 p-6`}
+			>
+				{children}
+			</div>
 		</div>
 	);
 }

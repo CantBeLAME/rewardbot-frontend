@@ -27,7 +27,7 @@ export default function Login() {
 		setUserInfo(data.user);
 		setCanvasToken(data.user.canvasToken);
 
-		navigate("/statistics");
+		navigate("/home");
 	};
 
 	return (
