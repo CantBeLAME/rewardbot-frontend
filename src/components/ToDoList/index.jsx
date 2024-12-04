@@ -1,9 +1,7 @@
-
 import React, { useEffect, useState } from "react";
 import ToDoCard from "./ToDoCard";
 
-
-export default function ToDoList({data}) {
+export default function ToDoList({ data }) {
 	const [todos, setTodos] = useState(data);
 
 	// const markComplete = (index) => {

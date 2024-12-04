@@ -1,8 +1,6 @@
-
 import React, { useEffect, useState } from "react";
 import ToDoCard from "./ToDoCard";
 import Container from "../../Container";
-
 
 export default function ToDoList({ data }) {
 	const [todos, setTodos] = useState(data);
