@@ -82,7 +82,7 @@ axiosAuth.interceptors.response.use(
 				refreshSubscribers = [];
 				console.error("Refresh token failed:", refreshError);
 				// Redirect to login
-				window.location.href = "/login";
+				window.location.href = "/";
 				return Promise.reject(refreshError);
 			}
 		}
@@ -136,7 +136,7 @@ axiosCanvas.interceptors.response.use(
 				refreshSubscribers = [];
 				console.error("Refresh token failed:", refreshError);
 				// Redirect to login
-				window.location.href = "/login";
+				window.location.href = "/";
 				return Promise.reject(refreshError);
 			}
 		}
