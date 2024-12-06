@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getAssignmentsTimeRange, validateToken } from "../../api/canvas";
 import { useAuth } from "../../hooks/auth/useAuth";
 import { useNavigate } from "react-router-dom";
-import ToDoList from "../../components/Statistics/ToDoList";
+import { DataHandle, ToDoList } from "../../components/Statistics/";
 import { AssignmentType } from "../../const/assignments";
-import DataHandle from "../../components/Statistics/DataHandle";
 import { Main, Sidebar } from "../../components/Sidebar";
 
 export default function Statistics() {

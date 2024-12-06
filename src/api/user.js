@@ -8,7 +8,7 @@ export const apiGetUserByEmail = async ({ email }) => {
 		return response.data;
 	} catch (error) {
 		console.log(error);
-		// navigateTo("/");
+		navigateTo("/");
 	}
 };
 
@@ -19,7 +19,7 @@ export const apiGetUser = async () => {
 		return response.data;
 	} catch (error) {
 		console.log(error);
-		// navigateTo("/");
+		navigateTo("/");
 	}
 };
 
@@ -29,7 +29,7 @@ export const apiPostUser = async (data) => {
 		return response.data;
 	} catch (error) {
 		console.log(error);
-		// navigateTo("/");
+		navigateTo("/");
 	}
 };
 
@@ -40,7 +40,7 @@ export const apiLogin = async ({ email, password }) => {
 		return { status: response.status, data: response.data };
 	} catch (error) {
 		console.log(error);
-		// navigateTo("/");
+		navigateTo("/");
 	}
 };
 
@@ -52,7 +52,7 @@ export const apiLogout = async () => {
 		return response.data;
 	} catch (error) {
 		console.log(error);
-		// navigateTo("/");
+		navigateTo("/");
 	}
 };
 

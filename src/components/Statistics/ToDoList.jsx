@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ToDoCard from "./ToDoCard";
-import Container from "../../Container";
+import { ToDoCard } from "./";
+import Container from "../Container";
 
 export default function ToDoList({ showCompleted, data }) {
 	const [todos, setTodos] = useState(data);

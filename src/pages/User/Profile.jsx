@@ -1,6 +1,5 @@
 import React from "react";
-import Profile from "../../components/Profile/Profile";
-import Settings from "../../components/Profile/Settings";
+import { Profile, Settings, Reward } from "../../components/Profile/";
 import { Main, Sidebar } from "../../components/Sidebar";
 import { useAuth, useCanvasAuth } from "../../hooks/auth/useAuth";
 
@@ -13,14 +12,16 @@ export default function ProfilePage() {
 	}
 
 	return (
-		<div className="flex h-full w-full">
-			<Sidebar>
-				<Profile user={user} canvasUser={canvasUser} />
-			</Sidebar>
-			<Main>
-				<Settings user={user} />
-				<Settings user={user} />
-			</Main>
+		<div className="flex flex-col gap-6 h-full w-full">
+			<div className="flex h-1/3 w-full">
+				<Sidebar>
+					<Profile user={user} canvasUser={canvasUser} />
+				</Sidebar>
+				<Main>
+					<Settings user={user} />
+				</Main>
+			</div>
+			<Reward />
 		</div>
 	);
 }

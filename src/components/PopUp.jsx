@@ -26,6 +26,20 @@ const CanvasTokenPopupContent = ({ onChange }) => {
 	);
 };
 
+const RewardContent = ({ reward: { name, image, after } }) => {
+	return (
+		<div className="flex flex-col gap-4 items-center">
+			<h2 className="text-2xl">
+				You have redeemed your reward!
+			</h2>
+			<div className="text-center items-center flex flex-col">
+				<img src={image} alt={name} className="h-64" />
+				<p className="text-lg font-bold">{after}</p>
+			</div>
+		</div>
+	);
+};
+
 export default function PopUp() {
 	useEffect(() => {
 		Popup.registerPlugin("canvasTokenPopup", function (success, cancel) {
@@ -57,10 +71,59 @@ export default function PopUp() {
 								success(token);
 								Popup.close();
 							},
+						},],
+				},
+			});
+		});
+
+		Popup.registerPlugin("redeemPopup", function (success) {
+
+			this.create({
+				title: "Would you like to redeem this reward?",
+				buttons: {
+					left: [
+						{
+							text: "Cancel",
+							className: "danger",
+							action: function () {
+								Popup.close();
+							},
+						},
+					],
+					right: [
+						{
+							text: "Redeem",
+							className: "success",
+							action: function () {
+								success();
+								Popup.close();
+							},
 						},
 					],
 				},
 			});
+		});
+
+		Popup.registerPlugin("rewardPopup", function (success, reward) {
+
+			this.create({
+				title: "CONGRATULATIONS!",
+				content: <RewardContent reward={reward} />,
+				buttons: {
+					right: [
+						{
+							text: "Close",
+							className: "success",
+							action: function () {
+								success();
+								Popup.close();
+							},
+						},
+					],
+				},
+			});
+
+
 		});
 	}, []);
 

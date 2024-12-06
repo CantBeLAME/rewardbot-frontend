@@ -2,7 +2,7 @@ import { MdQuiz, MdAssignment } from "react-icons/md";
 import { RiQuestionAnswerFill } from "react-icons/ri";
 import { BsCheckAll } from "react-icons/bs";
 import { useState } from "react";
-import { putMarkComplete, validateToken } from "../../../api/canvas";
+import { putMarkComplete, validateToken } from "../../api/canvas";
 import { useNavigate } from "react-router-dom";
 export default function ToDoCard({ item }) {
 	const [complete, setComplete] = useState(item.marked_complete);

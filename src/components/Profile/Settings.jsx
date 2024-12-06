@@ -32,7 +32,7 @@ export default function Settings({ user: { id, option, showCompleted } }) {
 	};
 
 	return (
-		<Container className={"h-1/3 p-16"}>
+		<Container className={"p-8 flex flex-col  justify-center"}>
 			<h2 className="mb-6 flex items-center gap-4 text-center text-2xl font-bold text-gray-800">
 				<IoMdSettings />
 				Settings
