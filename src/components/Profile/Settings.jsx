@@ -3,7 +3,7 @@ import Container from "../Container";
 import { IoMdSettings } from "react-icons/io";
 import Checkbox from "../Checkbox";
 import Radio from "../Radio";
-import { apiOption, apiShowCompleted } from "../../api/user";
+import { apiPutUser } from "../../api/user";
 
 export default function Settings({ user: { id, option, showCompleted } }) {
 	const [statisticOption, setStatisticOption] = useState(option);
@@ -20,14 +20,14 @@ export default function Settings({ user: { id, option, showCompleted } }) {
 		const newOption = e.target.value;
 		if (newOption === undefined || newOption === statisticOption) return;
 
-		apiOption({ id, option: newOption });
+		apiPutUser({ option: newOption });
 		setStatisticOption(newOption);
 	};
 
 	const handleShowComplete = (check) => {
 		if (check === isChecked) return;
 
-		apiShowCompleted({ id, showCompleted: check });
+		apiPutUser({ showCompleted: check });
 		setIsChecked(check);
 	};
 

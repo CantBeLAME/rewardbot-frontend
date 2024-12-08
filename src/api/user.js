@@ -1,6 +1,6 @@
 import { axiosDefault, axiosAuth, axiosCanvas } from "./";
 import navigateTo from "../utils/navigateTo";
-import { removeCanvasToken } from "../store/token";
+import { removeCanvasToken, getUserID , removeUserID} from "../store/token";
 
 export const apiGetUserByEmail = async ({ email }) => {
 	try {
@@ -47,6 +47,7 @@ export const apiLogout = async () => {
 	try {
 		const response = await axiosDefault.post("/logout");
 		removeCanvasToken();
+		removeUserID();
 		axiosCanvas.defaults.headers.common["Authorization"] = "";
 		return response.data;
 	} catch (error) {
@@ -55,26 +56,15 @@ export const apiLogout = async () => {
 	}
 };
 
-export const apiOption = async ({ id, option }) => {
-	try {
-		const response = await axiosAuth.patch(`/user/${id}/option`, {
-			option,
-		});
-		console.log(response);
 
+export const apiPutUser = async (data) => {
+	const id = getUserID()
+	try {
+		const response = await axiosAuth.put(`/user/${id}`, 
+			data,
+		);
 		return response.data;
 	} catch (error) {
 		console.log(error);
 	}
-};
-
-export const apiShowCompleted = async ({ id, showCompleted }) => {
-	try {
-		const response = await axiosAuth.patch(`/user/${id}/showCompleted`, {
-			showCompleted,
-		});
-		return response.data;
-	} catch (error) {
-		console.log(error);
-	}
-};
+}

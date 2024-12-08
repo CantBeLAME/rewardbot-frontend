@@ -2,6 +2,7 @@ import { axiosCanvas } from ".";
 import { getCanvasToken } from "../store/token";
 import Popup from "react-popup";
 import { setCanvasToken } from "../store/token";
+import { apiPutUser } from "./user";
 import {
 	convertPlannerAssignments,
 	convertSubmission,
@@ -136,15 +137,13 @@ export async function validateToken(getCanvasInfo, save, cancel) {
 					console.log("New token entered:", token);
 					setCanvasToken(token);
 					Popup.close();
-					// TODO: Save the token somewhere (e.g., in state or local storage)
-
-					// Re-fetch data after saving the new token
+					await apiPutUser({ canvasToken: token });
 					await attempt();
 				},
 				(value) => {
 					console.log("Cancel clicked. Token value:", value);
 					Popup.close();
-					cancel();
+					// cancel();
 				},
 			);
 		}

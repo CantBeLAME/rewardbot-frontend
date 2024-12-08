@@ -5,7 +5,7 @@ import { Button } from "../../components/Button";
 import { apiLogin } from "../../api/user";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/auth";
-import { setCanvasToken } from "../../store/token";
+import { setCanvasToken, setUserID } from "../../store/token";
 import Popup from "react-popup";
 
 export default function Login() {
@@ -30,16 +30,9 @@ export default function Login() {
 				Popup.alert("Login failed.", data);
 				return;
 		}
-		if (status === 200) {
-			Popup.alert("Login failed.");
-			return;
-		}
-		else if (status !== 200) {
-			Popup.alert("Login failed.");
-			return;
-		}
 		setUserInfo(data.user);
 		setCanvasToken(data.user.canvasToken);
+		setUserID(data.user._id);
 
 		navigate("/home");
 	};
