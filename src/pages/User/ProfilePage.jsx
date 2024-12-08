@@ -1,5 +1,5 @@
 import React from "react";
-import { Profile, Settings, Reward } from "../../components/Profile/";
+import { Profile, Settings, Reward } from "../../components/Profile";
 import { Main, Sidebar } from "../../components/Sidebar";
 import { useAuth, useCanvasAuth } from "../../hooks/auth/useAuth";
 

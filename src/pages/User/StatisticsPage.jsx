@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import {
 	getAssignmentsTimeRange,
-	getAllAssignmentsOfCourse,
-	getCanvasCourse,
 	validateToken,
 } from "../../api/canvas";
 import { useAuth } from "../../hooks/auth/useAuth";
 import { useNavigate } from "react-router-dom";
-import { DataHandle, ToDoList } from "../../components/Statistics/";
+import { DataHandle, ToDoList } from "../../components/Statistics";
 import { AssignmentType } from "../../const/assignments";
 import { Main, Sidebar } from "../../components/Sidebar";
 
