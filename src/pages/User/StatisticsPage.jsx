@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-	getAssignmentsTimeRange,
-	validateToken,
-} from "../../api/canvas";
+import { getAssignmentsTimeRange, validateToken } from "../../api/canvas";
 import { useAuth } from "../../hooks/auth/useAuth";
 import { useNavigate } from "react-router-dom";
 import { DataHandle, ToDoList } from "../../components/Statistics";

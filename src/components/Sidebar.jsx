@@ -1,11 +1,7 @@
 import React from "react";
 
 export const Sidebar = ({ children }) => {
-	return (
-		<div className="h-full w-1/3 min-w-48 overflow-y-scroll lg:min-w-64">
-			{children}
-		</div>
-	);
+	return <div className="h-full w-1/3 min-w-48 lg:min-w-64">{children}</div>;
 };
 
 Sidebar.Title = ({ children }) => {

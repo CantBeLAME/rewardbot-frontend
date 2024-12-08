@@ -9,7 +9,7 @@ export default function Profile({
 		<Container className={"flex items-center justify-center p-8"}>
 			<Content>
 				<img
-					className="h-24 w-24 rounded-full border-4 border-blue-500"
+					className="border-black-100 h-24 w-24 rounded-full border-4"
 					src={image ?? "https://via.placeholder.com/150"}
 					alt="User Avatar"
 				/>

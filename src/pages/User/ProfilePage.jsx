@@ -13,7 +13,7 @@ export default function ProfilePage() {
 
 	return (
 		<div className="flex h-full w-full flex-col gap-6">
-			<div className="flex h-1/3 w-full">
+			<div className="flex h-[45%] w-full">
 				<Sidebar>
 					<Profile user={user} canvasUser={canvasUser} />
 				</Sidebar>

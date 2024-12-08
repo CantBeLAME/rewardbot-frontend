@@ -3,7 +3,7 @@ import React from "react";
 export default function Checkbox({ children, isChecked, handleCheck }) {
 	return (
 		<>
-			<div className="mt-6 flex items-center">
+			<div className="flex items-center">
 				<label
 					className={`flex cursor-pointer items-center rounded-lg py-2 transition ${isChecked ? "" : "text-gray-800"}`}
 				>

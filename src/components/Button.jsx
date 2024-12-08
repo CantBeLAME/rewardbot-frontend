@@ -9,9 +9,9 @@ const buttonStyles = cva(
 		variants: {
 			variant: {
 				primary:
-					"bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500",
+					"bg-primary text-white hover:bg-primary-700 focus:ring-primary-500",
 				secondary:
-					"bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500",
+					"bg-secondary text-white hover:bg-secondary-700 focus:ring-secondary-500",
 				danger: "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500",
 				outline:
 					"border border-indigo-600 text-indigo-600 hover:bg-indigo-50 focus:ring-indigo-500",

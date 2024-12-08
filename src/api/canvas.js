@@ -67,7 +67,7 @@ export async function getAssignmentsTimeRange(option) {
 			},
 			Semester: {
 				start: new Date("2024-08-23"),
-				end: new Date("2024-12-10"),
+				end: new Date("2024-12-19"),
 			},
 		};
 

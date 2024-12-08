@@ -4,12 +4,13 @@ import { IoMdSettings } from "react-icons/io";
 import Checkbox from "../Checkbox";
 import Radio from "../Radio";
 import { apiOption, apiShowCompleted } from "../../api/user";
+import { Button } from "../Button";
 
 export default function Settings({ user: { id, option, showCompleted } }) {
-	const [selectedOption, setSelectedOption] = useState(option);
+	const [statisticOption, setStatisticOption] = useState(option);
 	const [isChecked, setIsChecked] = useState(showCompleted);
 
-	const choose = [
+	const dateRangeSetting = [
 		{ value: "Day", label: "Day" },
 		{ value: "Week", label: "Week" },
 		{ value: "Month", label: "Month" },
@@ -18,10 +19,10 @@ export default function Settings({ user: { id, option, showCompleted } }) {
 
 	const handleOption = (e) => {
 		const newOption = e.target.value;
-		if (newOption === undefined || newOption === selectedOption) return;
+		if (newOption === undefined || newOption === statisticOption) return;
 
 		apiOption({ id, option: newOption });
-		setSelectedOption(newOption);
+		setStatisticOption(newOption);
 	};
 
 	const handleShowComplete = (check) => {
@@ -32,19 +33,21 @@ export default function Settings({ user: { id, option, showCompleted } }) {
 	};
 
 	return (
-		<Container className={"flex flex-col justify-center p-8"}>
-			<h2 className="mb-6 flex items-center gap-4 text-center text-2xl font-bold text-gray-800">
+		<Container className={"flex flex-col justify-center gap-8 p-8"}>
+			<h2 className="flex items-center gap-4 text-center text-2xl font-bold text-gray-800">
 				<IoMdSettings />
 				Settings
 			</h2>
-			<Radio
-				options={choose}
-				selectedOption={selectedOption}
-				handleOption={handleOption}
-			/>
-			<Checkbox isChecked={isChecked} handleCheck={handleShowComplete}>
-				<span>Show Completed Assignments in To Do List</span>
-			</Checkbox>
+			<div className="flex flex-col justify-center gap-5 pl-8">
+				<Radio
+					options={dateRangeSetting}
+					selectedOption={statisticOption}
+					handleOption={handleOption}
+				/>
+				<Checkbox isChecked={isChecked} handleCheck={handleShowComplete}>
+					<span>Show Completed Assignments in To Do List</span>
+				</Checkbox>
+			</div>
 		</Container>
 	);
 }

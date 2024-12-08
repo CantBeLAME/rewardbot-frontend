@@ -40,7 +40,7 @@ export default function Reward() {
 
 	return (
 		<Container
-			className={"flex flex-col items-center justify-center gap-20 p-8"}
+			className={"flex flex-col items-center justify-center gap-6 p-8"}
 		>
 			<div className="flex gap-20">
 				<img src={Robot} alt="robot" className="h-32" />

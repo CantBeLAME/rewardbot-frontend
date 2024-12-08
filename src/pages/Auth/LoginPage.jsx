@@ -60,6 +60,7 @@ export default function Login() {
 							</Button>
 							<Link className="flex w-full" to="/create-account">
 								<Button
+									variant={"secondary"}
 									className="mt-4 h-10 w-full"
 									type="submit"
 								>
