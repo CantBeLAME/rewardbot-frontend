@@ -2,7 +2,10 @@ import { axiosCanvas } from ".";
 import { getCanvasToken } from "../store/token";
 import Popup from "react-popup";
 import { setCanvasToken } from "../store/token";
-import { convertPlannerAssignments } from "../utils/convertAssignments";
+import {
+	convertPlannerAssignments,
+	convertSubmission,
+} from "../utils/convertAssignments";
 
 export async function getCanvasCourse() {
 	try {
@@ -38,14 +41,16 @@ export async function putMarkComplete({ id, complete }) {
 /* Get assignments from api */
 export async function getAssignmentsTimeRange(option) {
 	async function getAllAssignmentsRequest(start, end, allPages = true) {
-		// assumption: this request will succeed, otherwise we should throw a fatal error and not load
-
 		const initialURL = `planner/items?start_date=${start}${
 			end ? "&end_date=" + end : ""
 		}&per_page=1000`;
 		return await getPaginatedRequest(initialURL, allPages);
 	}
 	try {
+		if (!option || option === undefined) {
+			option = "Semester";
+		}
+
 		const now = new Date();
 		const options = {
 			Day: {
@@ -61,25 +66,42 @@ export async function getAssignmentsTimeRange(option) {
 				end: new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000),
 			},
 			Semester: {
-				start: new Date("2024-08-26"),
-				end: new Date("2024-12-12"),
+				start: new Date("2024-08-23"),
+				end: new Date("2024-12-10"),
 			},
 		};
 
-		const st = options[option]?.start ?? options["Day"]?.start;
+		const st = options[option].start;
 		st.setDate(st.getDate() - 1); // Adjust for time zones
-		const en = options[option]?.end ?? options["Day"]?.end;
+		const en = options[option].end;
 		en.setDate(en.getDate() + 1);
 
 		const startStr = st.toISOString().split("T")[0];
 		const endStr = en.toISOString().split("T")[0];
 
-		// console.log("Fetching assignments between:", startStr, endStr);
-
 		const data = await getAllAssignmentsRequest(startStr, endStr);
-		// console.log("Fetched Data:", data);
-
 		return { data: convertPlannerAssignments(data || []) };
+	} catch (err) {
+		console.error("Error in getAssignmentsTimeRange:", err.message);
+		return { data: [] }; // Return empty data on error
+	}
+}
+
+export async function getAllAssignmentsOfCourse(courses) {
+	async function getAllAssignmentsRequest(course_id, allPages = true) {
+		const initialURL = `/courses/${course_id}/assignments&per_page=1000`;
+		return await getPaginatedRequest(
+			initialURL,
+			{ include: ["submission"] },
+			allPages,
+		);
+	}
+	try {
+		const assignments = courses.map(async (course) => {
+			return await getAllAssignmentsRequest(course.id);
+		});
+
+		return { data: convertSubmission(assignments.flatMap() || []) };
 	} catch (err) {
 		console.error("Error in getAssignmentsTimeRange:", err.message);
 		return { data: [] }; // Return empty data on error
@@ -143,13 +165,14 @@ const parseLinkHeader = (link) => {
 	return ret;
 };
 
-export async function getPaginatedRequest(url, recurse = false) {
+export async function getPaginatedRequest(url, body = {}, recurse = false) {
 	const results = [];
 	try {
 		let nextUrl = url;
 		// console.log("Fetching paginated data from:", nextUrl);
 		while (nextUrl) {
-			const res = await axiosCanvas.get(nextUrl);
+			console.log("Next URL:", nextUrl);
+			const res = await axiosCanvas.get(nextUrl, body);
 			results.push(...res.data);
 
 			// Parse next URL from "link" header

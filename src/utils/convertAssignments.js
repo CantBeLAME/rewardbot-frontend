@@ -78,6 +78,7 @@ export function convertPlannerAssignments(assignments) {
 				assignment.planner_override?.dismissed ||
 				(assignment.plannable_type === AssignmentType.ANNOUNCEMENT &&
 					assignment.plannable.read_state === "read"),
+			submissions: assignment.submissions,
 		};
 
 		if (
@@ -118,4 +119,71 @@ export function convertPlannerAssignments(assignments) {
 
 		return full;
 	});
+}
+
+export async function convertSubmission(assignments) {
+	try {
+		return assignments.map((assignment) => {
+			const type = assignment.quiz_id
+				? AssignmentType.QUIZ
+				: AssignmentType.ASSIGNMENT;
+			const submission = assignment?.submission;
+			// console.log("Submission:", submission);
+			const converted = {
+				id:
+					(type === AssignmentType.QUIZ
+						? submission?.quiz_submissions[0]?.id
+						: submission?.id) ?? 0,
+				user_id: submission?.user.user_id ?? 0,
+				course_id: Number(assignment?.course_id ?? 0),
+				assignment_id: Number(assignment?.id ?? 0),
+				submitted_at:
+					type === AssignmentType.QUIZ
+						? submission.quiz_submissions.reduce(
+								(latest, current) => {
+									if (!current?.finished_at) return latest;
+									return new Date(latest?.finished_at) >
+										new Date(current.finished_at)
+										? latest
+										: current;
+								},
+								null,
+							)?.finished_at
+						: (submission?.submitted_at ?? null),
+				type: type,
+				submitted:
+					type === AssignmentType.QUIZ
+						? submission.quiz_submissions.reduce(
+								(latest, current) => {
+									return current.finished_at ? true : latest;
+								},
+								false,
+							)
+						: !!submission?.submitted_at,
+				late: !!submission?.late,
+				missing:
+					submission?.missing ??
+					(type === AssignmentType.QUIZ
+						? submission.quiz_submissions.reduce(
+								(latest, current) =>
+									latest ||
+									current?.workflow_state === "untaken",
+								false,
+							)
+						: false) ??
+					false,
+				due_at:
+					submission?.cached_due_date ??
+					submission?.due_at ??
+					(type === AssignmentType.QUIZ &&
+					submission.quiz_submissions.length > 0
+						? submission.quiz_submissions[0]?.end_at
+						: null),
+			};
+
+			return converted;
+		});
+	} catch (error) {
+		console.log("Error converting submission:", error);
+	}
 }

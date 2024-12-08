@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getAssignmentsTimeRange, validateToken } from "../../api/canvas";
+import {
+	getAssignmentsTimeRange,
+	getAllAssignmentsOfCourse,
+	getCanvasCourse,
+	validateToken,
+} from "../../api/canvas";
 import { useAuth } from "../../hooks/auth/useAuth";
 import { useNavigate } from "react-router-dom";
 import { DataHandle, ToDoList } from "../../components/Statistics/";
@@ -13,9 +18,21 @@ export default function Statistics() {
 	} = useAuth();
 	const navigate = useNavigate();
 	const [planner, setPlanner] = useState([]);
+	// const [courses, setCourses] = useState([]);
 
 	useEffect(() => {
 		if (loading) return;
+
+		// validateToken(
+		// 	() => getCanvasCourse(option),
+		// 	(data) => {
+		// 		setCourses(data ?? []);
+		// 	},
+		// 	() => {
+		// 		navigate("/");
+		// 	},
+		// );
+
 		validateToken(
 			() => getAssignmentsTimeRange(option),
 			(data) => {
@@ -33,6 +50,19 @@ export default function Statistics() {
 			},
 		);
 	}, [option, navigate, loading]);
+
+	// useEffect(() => {
+	// 	if (loading) return;
+	// 	validateToken(
+	// 		() => getAllAssignmentsOfCourse(courses),
+	// 		(data) => {
+	// 			console.log(data ?? [])
+	// 		},
+	// 		() => {
+	// 			navigate("/");
+	// 		},
+	// 	);
+	// }, [courses, navigate, loading]);
 
 	const sortedData = [...planner].sort(
 		(a, b) => new Date(a.due_at) - new Date(b.due_at),

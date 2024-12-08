@@ -12,7 +12,7 @@ export default function ProfilePage() {
 	}
 
 	return (
-		<div className="flex flex-col gap-6 h-full w-full">
+		<div className="flex h-full w-full flex-col gap-6">
 			<div className="flex h-1/3 w-full">
 				<Sidebar>
 					<Profile user={user} canvasUser={canvasUser} />

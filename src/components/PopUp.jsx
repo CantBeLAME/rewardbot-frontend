@@ -28,11 +28,9 @@ const CanvasTokenPopupContent = ({ onChange }) => {
 
 const RewardContent = ({ reward: { name, image, after } }) => {
 	return (
-		<div className="flex flex-col gap-4 items-center">
-			<h2 className="text-2xl">
-				You have redeemed your reward!
-			</h2>
-			<div className="text-center items-center flex flex-col">
+		<div className="flex flex-col items-center gap-4">
+			<h2 className="text-2xl">You have redeemed your reward!</h2>
+			<div className="flex flex-col items-center text-center">
 				<img src={image} alt={name} className="h-64" />
 				<p className="text-lg font-bold">{after}</p>
 			</div>
@@ -71,13 +69,13 @@ export default function PopUp() {
 								success(token);
 								Popup.close();
 							},
-						},],
+						},
+					],
 				},
 			});
 		});
 
 		Popup.registerPlugin("redeemPopup", function (success) {
-
 			this.create({
 				title: "Would you like to redeem this reward?",
 				buttons: {
@@ -105,7 +103,6 @@ export default function PopUp() {
 		});
 
 		Popup.registerPlugin("rewardPopup", function (success, reward) {
-
 			this.create({
 				title: "CONGRATULATIONS!",
 				content: <RewardContent reward={reward} />,
@@ -122,8 +119,6 @@ export default function PopUp() {
 					],
 				},
 			});
-
-
 		});
 	}, []);
 

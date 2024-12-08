@@ -6,7 +6,7 @@ export default function Profile({
 	canvasUser: { image, firstname, lastname },
 }) {
 	return (
-		<Container className={"flex justify-center items-center p-8"}>
+		<Container className={"flex items-center justify-center p-8"}>
 			<Content>
 				<img
 					className="h-24 w-24 rounded-full border-4 border-blue-500"
