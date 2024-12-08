@@ -18,9 +18,9 @@ const buttonStyles = cva(
 				link: "text-indigo-600 hover:underline focus:ring-indigo-500",
 			},
 			size: {
-				sm: "px-3 py-1 text-sm",
-				md: "px-4 py-2 text-base",
-				lg: "px-5 py-3 text-lg",
+				sm: "px-3 py-1 text-sm h-10",
+				md: "px-4 py-2 text-base h-10",
+				lg: "px-5 py-3 text-lg h-10",
 			},
 			disabled: {
 				true: "opacity-50 cursor-not-allowed",

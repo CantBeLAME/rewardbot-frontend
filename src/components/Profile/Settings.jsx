@@ -4,7 +4,6 @@ import { IoMdSettings } from "react-icons/io";
 import Checkbox from "../Checkbox";
 import Radio from "../Radio";
 import { apiOption, apiShowCompleted } from "../../api/user";
-import { Button } from "../Button";
 
 export default function Settings({ user: { id, option, showCompleted } }) {
 	const [statisticOption, setStatisticOption] = useState(option);
