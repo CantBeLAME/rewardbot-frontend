@@ -19,7 +19,7 @@ export default function Radio({
 							name="radioOptions"
 							value={option.value}
 							checked={selectedOption === option.value}
-							onChange={handleOption}
+							onChange={(e) => handleOption(e)}
 							className="hidden"
 						/>
 						<span>{option.label}</span>

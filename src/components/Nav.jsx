@@ -7,10 +7,6 @@ import { apiLogout } from "../api/user";
 export default function Nav({ children }) {
 	const [isOpen, setIsOpen] = useState(true);
 
-	const toggleSidebar = () => {
-		setIsOpen(!isOpen);
-	};
-
 	return (
 		<div className={`flex`}>
 			{/* Sidebar */}
@@ -26,7 +22,9 @@ export default function Nav({ children }) {
 					</div>
 					<button
 						className="text-gray-400 hover:text-white"
-						onClick={toggleSidebar}
+						onClick={() => {
+							setIsOpen(!isOpen);
+						}}
 					>
 						<FiMenu size={20} />
 					</button>

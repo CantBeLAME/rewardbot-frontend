@@ -37,13 +37,14 @@ export default function Login() {
 					<h2 className="text-center text-2xl font-bold text-gray-700">
 						Login
 					</h2>
-					<Form onSubmit={handleSubmit}>
+					<Form onSubmit={(e) => handleSubmit(e)}>
 						<Fieldset>
 							<Label>
 								Email
 								<Input
 									type="email"
 									name="email"
+									required
 									placeholder="Enter your email"
 								/>
 							</Label>
@@ -52,6 +53,7 @@ export default function Login() {
 								<Input
 									type="password"
 									name="password"
+									required
 									placeholder="Enter your password"
 								/>
 							</Label>

@@ -45,7 +45,7 @@ export default function ToDoCard({ item }) {
 			</div>
 			<button
 				className="rounded-lg p-1 transition duration-200 hover:bg-gray-200"
-				onClick={markComplete}
+				onClick={() => markComplete}
 			>
 				<BsCheckAll className="text-2xl" />
 			</button>

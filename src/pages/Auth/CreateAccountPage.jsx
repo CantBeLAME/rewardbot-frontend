@@ -4,27 +4,37 @@ import { usePostUser } from "../../hooks/query/user";
 import { apiGetUserByEmail } from "../../api/user";
 import { Link, useNavigate } from "react-router-dom";
 import Popup from "react-popup";
+import { useState } from "react";
 
 export default function CreateAccount() {
 	const { postUser } = usePostUser();
+	const [error, setError] = useState(0);
 
 	const navigate = useNavigate();
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const form = new FormData(event.currentTarget);
-		const username = form.get("username");
 		const email = form.get("email");
 		const password = form.get("password");
+		const confirm = form.get("confirmation-password");
 		const canvasToken = form.get("canvasToken");
 
 		const data = await apiGetUserByEmail({ email });
+
 		if (data) {
-			alert("Email already exists");
+			//"Email already exists"
+			setError(1);
+			return;
+		}
+
+		if (password !== confirm) {
+			// "Password do not match"
+			setError(2);
 			return;
 		}
 
 		postUser(
-			{ username, email, password, canvasToken },
+			{ email, password, canvasToken },
 			{
 				onSuccess: () => {
 					Popup.alert("User created successfully");
@@ -41,17 +51,8 @@ export default function CreateAccount() {
 				<h2 className="text-center text-2xl font-bold text-gray-700">
 					Register
 				</h2>
-				<Form className="space-y-6" onSubmit={handleSubmit}>
+				<Form className="space-y-6" onSubmit={(e) => handleSubmit(e)}>
 					<Fieldset>
-						<Label className="pt-3">
-							Username
-							<Input
-								required
-								type="text"
-								name="username"
-								placeholder="Enter your username"
-							/>
-						</Label>
 						<Label className="pt-3">
 							Email
 							<Input
@@ -60,6 +61,7 @@ export default function CreateAccount() {
 								name="email"
 								placeholder="Enter your email"
 							/>
+							{error === 1 && <Label className="text-red-500 text-xs pl-2 mt-1">* Email already exists</Label>}
 						</Label>
 
 						<Label>
@@ -79,6 +81,7 @@ export default function CreateAccount() {
 								name="confirmation-password"
 								placeholder="Confirm your password"
 							/>
+							{error === 2 && <Label className="text-red-500 text-xs pl-2 mt-1">* Password do not match</Label>}
 						</Label>
 						<Label>
 							Canvas Access Token
