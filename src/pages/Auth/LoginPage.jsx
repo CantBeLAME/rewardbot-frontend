@@ -20,8 +20,22 @@ export default function Login() {
 
 		const { status, data } = await apiLogin({ email, password });
 
-		if (status !== 200) {
-			Popup.alert("Login failed");
+		switch (status) {
+			case 200:
+				break;
+			case 401:
+				Popup.alert("Login failed. User not found.");
+				return;
+			default:
+				Popup.alert("Login failed.", data);
+				return;
+		}
+		if (status === 200) {
+			Popup.alert("Login failed.");
+			return;
+		}
+		else if (status !== 200) {
+			Popup.alert("Login failed.");
 			return;
 		}
 		setUserInfo(data.user);

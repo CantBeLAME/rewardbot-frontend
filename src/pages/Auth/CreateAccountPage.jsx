@@ -87,7 +87,7 @@ export default function CreateAccount() {
 							Canvas Access Token
 							<Input
 								required
-								type="password"
+								type="text"
 								name="canvasToken"
 								placeholder="Enter your canvas access token"
 							/>

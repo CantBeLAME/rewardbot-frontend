@@ -39,8 +39,7 @@ export const apiLogin = async ({ email, password }) => {
 
 		return { status: response.status, data: response.data };
 	} catch (error) {
-		console.log(error);
-		navigateTo("/");
+		return (error);
 	}
 };
 

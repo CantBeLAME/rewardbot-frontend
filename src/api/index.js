@@ -141,7 +141,7 @@ axiosCanvas.interceptors.response.use(
 				refreshSubscribers = [];
 				console.error("Refresh token failed:", refreshError);
 				// Redirect to login
-				window.location.href = "/";
+				// window.location.href = "/";
 				return Promise.reject(refreshError);
 			}
 		}

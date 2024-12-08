@@ -30,7 +30,7 @@ export default function Profile({
 							{email}
 						</span>
 					</div>
-					<div className="flex items-center justify-between w-full">
+					<div className="flex items-center justify-between w-full gap-x-8">
 						<span className="text-gray-600">Joined:</span>
 						<span className="font-medium text-gray-800">
 							{formattedDate}
