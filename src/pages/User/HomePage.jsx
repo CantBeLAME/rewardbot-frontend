@@ -4,6 +4,7 @@ import Container from "../../components/Container";
 import Robot from "../../assets/images/robot.png";
 import { Button } from "../../components/Button";
 import Extension from "../../assets/files/build.zip";
+import { Link } from "react-router-dom";
 
 export default function Home() {
 	const {
@@ -31,8 +32,8 @@ export default function Home() {
 				</h2>
 				<img src={Robot} alt="robot" className="h-32" />
 				<div className="flex w-full flex-col gap-4">
-					<a
-						href={"https://www.tasksforcanvas.info/"}
+					<Link
+						to={"https://www.tasksforcanvas.info/"}
 						className="w-full"
 					>
 						<Button
@@ -41,7 +42,7 @@ export default function Home() {
 						>
 							Download Task for Canvas Chrome Extension!
 						</Button>
-					</a>
+					</Link>
 					<Button
 						className="flex h-10 w-full text-center"
 						onClick={downloadExtension}

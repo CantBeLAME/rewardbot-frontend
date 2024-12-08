@@ -13,7 +13,7 @@ export const useGetUserByEmail = ({ email }) => {
 export const usePostUser = () => {
 	const { mutate: postUser } = useMutation({
 		mutationFn: async (data) => {
-			console.log(data);
+			// console.log(data);
 			return await apiPostUser(data);
 		},
 		onError: (error) => {
