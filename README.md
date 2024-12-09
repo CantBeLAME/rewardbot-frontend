@@ -8,7 +8,9 @@ This project requires Node v18.7.0+ or less than v20.5.0. Download [here](https:
 
 In the project directory, you can run:
 
-### `npm `
+### `npm npm install -g npm@10.7.0`
+
+Installs the version of npm needed.
 
 ### `npm start`
 
