@@ -2,7 +2,7 @@ import axios from "axios";
 
 //if in development connect with port 5555
 export const BASE_URL =
-	process.env !== "production"
+	process.env === "production"
 		? process.env.REACT_APP_API_URL
 		: "http://localhost:5555/";
 console.log("BASE_URL:", BASE_URL);
