@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ToDoCard } from "./";
 import Container from "../Container";
 
-export default function ToDoList({ showCompleted, data }) {
+export default function ToDoList({ completed, showCompleted, data }) {
 	const [todos, setTodos] = useState(data);
 
 	useEffect(() => {
@@ -17,9 +17,10 @@ export default function ToDoList({ showCompleted, data }) {
 				<h1 className="mb-6 text-center text-2xl font-bold">
 					My To-Do List
 				</h1>
-				{todos.map((item, index) => (
-					<ToDoCard key={index} item={item} index={index} />
-				))}
+				{todos.length === 0 ? <p className="text-center text-lg font-bold">You’re all caught up!</p> :
+					todos.map((item, index) => (
+						<ToDoCard key={index} item={item} index={index} />
+					))}
 			</Container>
 		</div>
 	);

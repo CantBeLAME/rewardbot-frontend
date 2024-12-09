@@ -8,56 +8,37 @@ import { Main, Sidebar } from "../../components/Sidebar";
 
 export default function Statistics() {
 	const {
-		user: { showCompleted, option },
+		user: { completed, showCompleted, option },
 		loading,
 	} = useAuth();
 	const navigate = useNavigate();
 	const [planner, setPlanner] = useState([]);
-	// const [courses, setCourses] = useState([]);
-
 	useEffect(() => {
 		if (loading) return;
-
-		// validateToken(
-		// 	() => getCanvasCourse(option),
-		// 	(data) => {
-		// 		setCourses(data ?? []);
-		// 	},
-		// 	() => {
-		// 		navigate("/");
-		// 	},
-		// );
 
 		validateToken(
 			() => getAssignmentsTimeRange(option),
 			(data) => {
 				setPlanner(
-					data?.filter(
-						({ type }) =>
-							type === AssignmentType.ASSIGNMENT ||
-							type === AssignmentType.QUIZ ||
-							type === AssignmentType.DISCUSSION,
-					) ?? [],
+					data
+						?.filter(
+							({ type }) =>
+								type === AssignmentType.ASSIGNMENT ||
+								type === AssignmentType.QUIZ ||
+								type === AssignmentType.DISCUSSION,
+						)
+						.map((assingment) =>
+							completed.includes(assingment.id)
+								? { ...assingment, marked_complete: true }
+								: assingment,
+						) ?? [],
 				);
 			},
 			() => {
 				navigate("/");
 			},
 		);
-	}, [option, navigate, loading]);
-
-	// useEffect(() => {
-	// 	if (loading) return;
-	// 	validateToken(
-	// 		() => getAllAssignmentsOfCourse(courses),
-	// 		(data) => {
-	// 			console.log(data ?? [])
-	// 		},
-	// 		() => {
-	// 			navigate("/");
-	// 		},
-	// 	);
-	// }, [courses, navigate, loading]);
+	}, [option, navigate, loading, completed]);
 
 	const sortedData = [...planner].sort(
 		(a, b) => new Date(a.due_at) - new Date(b.due_at),

@@ -31,6 +31,7 @@ export const useAuth = () => {
 			createdAt: user?.createdAt,
 			option: user?.option,
 			showCompleted: user?.showCompleted,
+			completed: user?.completed,
 		},
 		loading,
 	};
