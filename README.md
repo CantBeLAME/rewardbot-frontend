@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This project requires Node v18.7.0+ or less than v20.5.0. 
+This project requires Node v18.7.0+ or less than v20.5.0. Download [here](https://nodejs.org/en/download/package-manager)
 
 ## Available Scripts
 
