@@ -32,11 +32,7 @@ export default function ToDoCard({ item }) {
 		>
 			<div>
 				{icon[item.type]}
-				<h2
-					className="font-semibold"
-				>
-					{item.name}
-				</h2>
+				<h2 className="font-semibold">{item.name}</h2>
 				<div className="text-sm text-gray-600">
 					Due: {new Date(item.due_at).toLocaleString()}
 				</div>

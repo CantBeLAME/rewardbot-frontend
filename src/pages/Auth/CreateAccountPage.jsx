@@ -61,7 +61,11 @@ export default function CreateAccount() {
 								name="email"
 								placeholder="Enter your email"
 							/>
-							{error === 1 && <Label className="text-red-500 text-xs pl-2 mt-1">* Email already exists</Label>}
+							{error === 1 && (
+								<Label className="mt-1 pl-2 text-xs text-red-500">
+									* Email already exists
+								</Label>
+							)}
 						</Label>
 
 						<Label>
@@ -81,7 +85,11 @@ export default function CreateAccount() {
 								name="confirmation-password"
 								placeholder="Confirm your password"
 							/>
-							{error === 2 && <Label className="text-red-500 text-xs pl-2 mt-1">* Password do not match</Label>}
+							{error === 2 && (
+								<Label className="mt-1 pl-2 text-xs text-red-500">
+									* Password do not match
+								</Label>
+							)}
 						</Label>
 						<Label>
 							Canvas Access Token

@@ -1,6 +1,6 @@
 import { axiosDefault, axiosAuth, axiosCanvas } from "./";
 import navigateTo from "../utils/navigateTo";
-import { removeCanvasToken, getUserID , removeUserID} from "../store/token";
+import { removeCanvasToken, getUserID, removeUserID } from "../store/token";
 
 export const apiGetUserByEmail = async ({ email }) => {
 	try {
@@ -39,7 +39,7 @@ export const apiLogin = async ({ email, password }) => {
 
 		return { status: response.status, data: response.data };
 	} catch (error) {
-		return (error);
+		return error;
 	}
 };
 
@@ -56,15 +56,12 @@ export const apiLogout = async () => {
 	}
 };
 
-
 export const apiPutUser = async (data) => {
-	const id = getUserID()
+	const id = getUserID();
 	try {
-		const response = await axiosAuth.put(`/user/${id}`, 
-			data,
-		);
+		const response = await axiosAuth.put(`/user/${id}`, data);
 		return response.data;
 	} catch (error) {
 		console.log(error);
 	}
-}
+};

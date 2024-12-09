@@ -1,4 +1,5 @@
-export function setCanvasToken(token, id) { // Store token securely
+export function setCanvasToken(token, id) {
+	// Store token securely
 	localStorage.setItem("canvasToken", token); // Store token securely
 }
 

@@ -43,7 +43,10 @@ export default function Settings({ user: { id, option, showCompleted } }) {
 					selectedOption={statisticOption}
 					handleOption={handleOption}
 				/>
-				<Checkbox isChecked={isChecked} handleCheck={handleShowComplete}>
+				<Checkbox
+					isChecked={isChecked}
+					handleCheck={handleShowComplete}
+				>
 					<span>Show Completed Assignments in To Do List</span>
 				</Checkbox>
 			</div>

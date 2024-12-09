@@ -1,10 +1,6 @@
 import React from "react";
 
-export default function Radio({
-	options,
-	selectedOption,
-	handleOption,
-}) {
+export default function Radio({ options, selectedOption, handleOption }) {
 	return (
 		<>
 			<div className="flex w-full space-x-4">
