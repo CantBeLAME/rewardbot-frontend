@@ -2,9 +2,13 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This project requires Node v18.7.0+ or less than v20.5.0. 
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm `
 
 ### `npm start`
 
