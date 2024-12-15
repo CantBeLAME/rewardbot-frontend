@@ -5,6 +5,7 @@ import Robot from "../../assets/images/robot.png";
 import { Button } from "../../components/Button";
 import Extension from "../../assets/files/build.zip";
 import { Link } from "react-router-dom";
+import { Label } from "../../components/Form";
 
 export default function Home() {
 	const {
@@ -49,6 +50,18 @@ export default function Home() {
 					>
 						Download RewardBot Chrome Extension!
 					</Button>
+					<Label>
+						Need help?
+						<Link
+							className="font-bold underline"
+							to="https://drive.google.com/file/d/1QLhftFPCZHbOcmQdlRN21M4bEvTs6uOq/view?usp=sharing"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{" "}
+							How install Reward Bot extension
+						</Link>
+					</Label>
 					<label className="text-xs text-red-700">
 						* Make the most of RewardBot! For a complete experience,
 						please download the Task for Canvas Chrome Extension. It
