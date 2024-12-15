@@ -32,6 +32,7 @@ export const useAuth = () => {
 			option: user?.option,
 			showCompleted: user?.showCompleted,
 			completed: user?.completed,
+			score: user?.score,
 		},
 		loading,
 	};

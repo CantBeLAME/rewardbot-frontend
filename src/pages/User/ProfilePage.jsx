@@ -21,7 +21,7 @@ export default function ProfilePage() {
 					<Settings user={user} />
 				</Main>
 			</div>
-			<Reward />
+			<Reward user={user} />
 		</div>
 	);
 }

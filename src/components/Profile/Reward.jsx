@@ -4,8 +4,13 @@ import Coupon from "../../assets/images/coupon.png";
 import Credit from "../../assets/images/extra.png";
 import Candy from "../../assets/images/candy.png";
 import Popup from "react-popup";
+import { useState } from "react";
+import { apiPutUser } from "../../api/user";
 
-export default function Reward() {
+export default function Reward({
+	user: { score }
+}) {
+	const [totalPoints, setTotalPoints] = useState(score)
 	const rewards = [
 		{
 			name: "Coupon",
@@ -27,11 +32,11 @@ export default function Reward() {
 		},
 	];
 
-	const totalPoints = 40;
-
 	const redeem = (index) => {
 		Popup.plugins().redeemPopup(async () => {
-			Popup.plugins().rewardPopup(() => {
+			setTotalPoints(totalPoints - rewards[index].points);
+			await apiPutUser({ score: rewards[index].points });
+			Popup.plugins().rewardPopup(async () => {
 				console.log("redeemed");
 			}, rewards[index]);
 		});
